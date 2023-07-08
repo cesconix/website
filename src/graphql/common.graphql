@@ -1,0 +1,28 @@
+query HomePage {
+  homePage {
+    welcome
+    fullname
+    slogan
+    shortBio(markdown: true)
+  }
+  common {
+    ...Common
+  }
+}
+
+fragment Common on CommonRecord {
+  logo {
+    url
+  }
+  pages {
+    displayName
+    slug
+  }
+  cvFile {
+    url
+  }
+  socials {
+    social
+    url
+  }
+}
