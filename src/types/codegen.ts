@@ -54,6 +54,77 @@ export type Scalars = {
   UploadId: { input: string; output: string }
 }
 
+export type AltFileField = FileFieldInterface & {
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  alt: Scalars["String"]["output"]
+  author?: Maybe<Scalars["String"]["output"]>
+  basename: Scalars["String"]["output"]
+  blurUpThumb?: Maybe<Scalars["String"]["output"]>
+  blurhash?: Maybe<Scalars["String"]["output"]>
+  colors: Array<ColorField>
+  copyright?: Maybe<Scalars["String"]["output"]>
+  customData: Scalars["CustomData"]["output"]
+  exifInfo: Scalars["CustomData"]["output"]
+  filename: Scalars["String"]["output"]
+  focalPoint?: Maybe<FocalPoint>
+  format: Scalars["String"]["output"]
+  height?: Maybe<Scalars["IntType"]["output"]>
+  id: Scalars["UploadId"]["output"]
+  md5: Scalars["String"]["output"]
+  mimeType: Scalars["String"]["output"]
+  notes?: Maybe<Scalars["String"]["output"]>
+  responsiveImage?: Maybe<ResponsiveImage>
+  size: Scalars["IntType"]["output"]
+  smartTags: Array<Scalars["String"]["output"]>
+  tags: Array<Scalars["String"]["output"]>
+  thumbhash?: Maybe<Scalars["String"]["output"]>
+  title?: Maybe<Scalars["String"]["output"]>
+  url: Scalars["String"]["output"]
+  video?: Maybe<UploadVideoField>
+  width?: Maybe<Scalars["IntType"]["output"]>
+}
+
+export type AltFileFieldAltArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>
+  locale?: InputMaybe<SiteLocale>
+}
+
+export type AltFileFieldBlurUpThumbArgs = {
+  imgixParams?: InputMaybe<ImgixParams>
+  punch?: Scalars["Float"]["input"]
+  quality?: Scalars["Int"]["input"]
+  size?: Scalars["Int"]["input"]
+}
+
+export type AltFileFieldCustomDataArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>
+  locale?: InputMaybe<SiteLocale>
+}
+
+export type AltFileFieldFocalPointArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>
+  locale?: InputMaybe<SiteLocale>
+}
+
+export type AltFileFieldResponsiveImageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>
+  imgixParams?: InputMaybe<ImgixParams>
+  locale?: InputMaybe<SiteLocale>
+  sizes?: InputMaybe<Scalars["String"]["input"]>
+}
+
+export type AltFileFieldTitleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>
+  locale?: InputMaybe<SiteLocale>
+}
+
+export type AltFileFieldUrlArgs = {
+  imgixParams?: InputMaybe<ImgixParams>
+}
+
 export type CollectionMetadata = {
   count: Scalars["IntType"]["output"]
 }
@@ -100,8 +171,8 @@ export type CommonRecord = RecordInterface & {
   cvFile?: Maybe<FileField>
   id: Scalars["ItemId"]["output"]
   logo: FileField
-  pages: Array<NavLinkRecord>
-  socials: Array<SocialLinkRecord>
+  navLinks: Array<NavLinkRecord>
+  socialLinks: Array<SocialLinkRecord>
 }
 
 /** Record of type Common (common) */
@@ -268,7 +339,7 @@ export type GlobalSeoField = {
 /** Record of type Home Page (home_page) */
 export type HomePageRecord = RecordInterface & {
   _allShortBioLocales?: Maybe<Array<StringNonNullMultiLocaleField>>
-  _allSloganLocales?: Maybe<Array<StringNonNullMultiLocaleField>>
+  _allTaglineLocales?: Maybe<Array<StringNonNullMultiLocaleField>>
   _allWelcomeLocales?: Maybe<Array<StringNonNullMultiLocaleField>>
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
@@ -285,9 +356,10 @@ export type HomePageRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
   fullname: Scalars["String"]["output"]
+  gallery: Array<AltFileField>
   id: Scalars["ItemId"]["output"]
   shortBio: Scalars["String"]["output"]
-  slogan: Scalars["String"]["output"]
+  tagline: Scalars["String"]["output"]
   welcome: Scalars["String"]["output"]
 }
 
@@ -297,7 +369,7 @@ export type HomePageRecord_AllShortBioLocalesArgs = {
 }
 
 /** Record of type Home Page (home_page) */
-export type HomePageRecord_AllSloganLocalesArgs = {
+export type HomePageRecord_AllTaglineLocalesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>
 }
 
@@ -318,7 +390,7 @@ export type HomePageRecordShortBioArgs = {
 }
 
 /** Record of type Home Page (home_page) */
-export type HomePageRecordSloganArgs = {
+export type HomePageRecordTaglineArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>
   locale?: InputMaybe<SiteLocale>
 }
@@ -1948,8 +2020,9 @@ export type SocialLinkRecord = RecordInterface & {
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
+  displayName: Scalars["String"]["output"]
   id: Scalars["ItemId"]["output"]
-  social: Scalars["String"]["output"]
+  key: Scalars["String"]["output"]
   url: Scalars["String"]["output"]
 }
 
@@ -2331,22 +2404,23 @@ export type HomePageQuery = {
   homePage?: {
     welcome: string
     fullname: string
-    slogan: string
+    tagline: string
     shortBio: string
+    gallery: Array<{ url: string; alt: string }>
   } | null
   common?: {
     logo: { url: string }
-    pages: Array<{ displayName: string; slug: string }>
+    navLinks: Array<{ displayName: string; slug: string }>
     cvFile?: { url: string } | null
-    socials: Array<{ social: string; url: string }>
+    socialLinks: Array<{ displayName: string; key: string; url: string }>
   } | null
 }
 
 export type CommonFragment = {
   logo: { url: string }
-  pages: Array<{ displayName: string; slug: string }>
+  navLinks: Array<{ displayName: string; slug: string }>
   cvFile?: { url: string } | null
-  socials: Array<{ social: string; url: string }>
+  socialLinks: Array<{ displayName: string; key: string; url: string }>
 }
 
 export const CommonFragmentDoc = `
@@ -2354,15 +2428,16 @@ export const CommonFragmentDoc = `
   logo {
     url
   }
-  pages {
+  navLinks {
     displayName
     slug
   }
   cvFile {
     url
   }
-  socials {
-    social
+  socialLinks {
+    displayName
+    key
     url
   }
 }
@@ -2372,8 +2447,12 @@ export const HomePageDocument = `
   homePage {
     welcome
     fullname
-    slogan
+    tagline
     shortBio(markdown: true)
+    gallery {
+      url
+      alt
+    }
   }
   common {
     ...Common

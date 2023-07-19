@@ -2,8 +2,12 @@ query HomePage {
   homePage {
     welcome
     fullname
-    slogan
+    tagline
     shortBio(markdown: true)
+    gallery {
+      url
+      alt
+    }
   }
   common {
     ...Common
@@ -14,15 +18,16 @@ fragment Common on CommonRecord {
   logo {
     url
   }
-  pages {
+  navLinks {
     displayName
     slug
   }
   cvFile {
     url
   }
-  socials {
-    social
+  socialLinks {
+    displayName
+    key
     url
   }
 }
