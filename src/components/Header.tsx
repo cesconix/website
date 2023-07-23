@@ -4,6 +4,7 @@ import Link from "next/link"
 import React from "react"
 import { usePathname } from "next/navigation"
 import { clsx } from "clsx"
+import { useRouter } from "next/router"
 
 type HeaderProps = {
   logoUrl: string
@@ -12,8 +13,9 @@ type HeaderProps = {
 }
 
 function Header(props: HeaderProps) {
-  const pathname = usePathname()
+  const { pathname } = useRouter()
 
+  console.log(pathname)
   return (
     <header className="sticky top-0 mx-auto flex h-24 w-full max-w-4xl items-center justify-between px-6 md:px-10">
       <Link href={"/"}>
@@ -38,8 +40,9 @@ function Header(props: HeaderProps) {
                     key={navLink.slug}
                     href={navLink.slug}
                     className={clsx(
-                      "mx-1 flex items-center p-3 text-sm text-foreground-600 no-underline hover:text-foreground-100",
-                      { "text-foreground-100": isActive }
+                      "mx-1 flex items-center p-3 text-sm no-underline hover:text-foreground-100",
+                      { "text-foreground-100": isActive },
+                      { "text-foreground-500": !isActive }
                     )}
                   >
                     <div className="mr-2 text-xs text-primary-600">
