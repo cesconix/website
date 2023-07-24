@@ -18,14 +18,14 @@ function HamburgerMenu(props: HamburgerMenuProps) {
   const [container, setContainer] = useState(null)
 
   useEffect(() => {
-    const handleRouteChange = () => {
+    const handleRouteComplete = () => {
       setOpen(false)
     }
 
-    router.events.on("routeChangeStart", handleRouteChange)
+    router.events.on("routeChangeComplete", handleRouteComplete)
 
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange)
+      router.events.off("routeChangeComplete", handleRouteComplete)
     }
   }, [router])
 
