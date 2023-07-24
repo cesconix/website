@@ -2,6 +2,7 @@ import React from "react"
 import { Space_Grotesk } from "next/font/google"
 import { CommonFragment } from "@/types/codegen"
 import Header from "./Header"
+import Footer from "./Footer"
 // import Footer from "./Footer"
 
 const spaceGrotesk = Space_Grotesk({
@@ -15,7 +16,9 @@ type LayoutProps = {
 
 function Layout(props: LayoutProps) {
   return (
-    <div className={`${spaceGrotesk.variable} font-sans antialiased`}>
+    <div
+      className={`${spaceGrotesk.variable} relative flex flex-col font-sans antialiased`}
+    >
       <Header
         logoUrl={props.logo?.url}
         navLinks={props.navLinks}

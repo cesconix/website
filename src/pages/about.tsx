@@ -22,7 +22,7 @@ export default function Page() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="mx-auto flex min-h-[calc(100dvh-96px)] max-w-4xl px-6 md:px-10">
+      <main className="mx-auto flex min-h-[calc(100dvh-96px)] w-full max-w-4xl px-6 md:px-10">
         About
       </main>
     </>

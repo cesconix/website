@@ -13,7 +13,7 @@ type WhoAmIProps = {
 function WhoAmI(props: WhoAmIProps) {
   return (
     <section>
-      <div className="space-y-5">
+      <div className="space-y-4 md:space-y-5">
         <p className="text-base font-medium text-primary-600 md:text-xl">
           {props.welcome}
         </p>
@@ -24,13 +24,13 @@ function WhoAmI(props: WhoAmIProps) {
           {props.tagline}
         </h2>
         <h3
-          className="space-y-5 text-xl text-foreground-700 md:text-2xl"
+          className="space-y-4 text-xl text-foreground-700 md:text-2xl"
           dangerouslySetInnerHTML={{
             __html: props.shortBio as string
           }}
         />
       </div>
-      <div className="my-10 flex space-x-5">
+      <div className="mb-4 mt-14 flex space-x-5">
         {props.socialLinks.map((socialLink) => {
           return (
             <Link
