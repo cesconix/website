@@ -1,34 +1,33 @@
-import { SocialLink } from "@/types"
 import Link from "next/link"
-import ArrowIcon from "./ArrowIcon"
+import { StructuredText as StructuredTextType } from "datocms-structured-text-utils"
+import { SocialLink } from "@/types"
+import { ArrowIcon } from "@/components/icons"
+import { CustomStructuredText, Heading } from "@/components/ui"
 
-type WhoAmIProps = {
+type AboutMeProps = {
   welcome: string
   fullname: string
   tagline: string
-  shortBio: string
+  shortBio: StructuredTextType
   socialLinks: SocialLink[]
 }
 
-function WhoAmI(props: WhoAmIProps) {
+function AboutMe(props: AboutMeProps) {
   return (
-    <section>
-      <div className="space-y-4 md:space-y-5">
+    <section className="flex min-h-[calc(100dvh-96px)] flex-col justify-center">
+      <div className="space-y-4 text-foreground-700 md:space-y-5">
         <p className="text-base font-medium text-primary-600 md:text-xl">
           {props.welcome}
         </p>
-        <h1 className="text-white text-3xl font-medium tracking-tight md:text-5xl">
+        <Heading level="h1" className="text-foreground-100">
           {props.fullname}
-        </h1>
-        <h2 className="text-3xl font-medium tracking-tight text-foreground-600 md:text-5xl">
+        </Heading>
+        <Heading level="h1" className="text-foreground-600">
           {props.tagline}
-        </h2>
-        <h3
-          className="space-y-4 text-xl text-foreground-700 md:text-2xl"
-          dangerouslySetInnerHTML={{
-            __html: props.shortBio as string
-          }}
-        />
+        </Heading>
+        <div className="space-y-4">
+          <CustomStructuredText data={props.shortBio} />
+        </div>
       </div>
       <div className="mb-4 mt-14 flex space-x-5">
         {props.socialLinks.map((socialLink) => {
@@ -49,4 +48,4 @@ function WhoAmI(props: WhoAmIProps) {
   )
 }
 
-export default WhoAmI
+export default AboutMe

@@ -1,7 +1,8 @@
 import { useRouter } from "next/router"
 import Link from "next/link"
-import { NavLink } from "@/types"
 import { clsx } from "clsx"
+
+import { NavLink } from "@/types"
 
 type NavLinksProps = {
   data: NavLink[]
@@ -20,23 +21,25 @@ function NavLinks(props: NavLinksProps) {
       {props.isMobile && (
         <NavLink
           index={-1}
-          data={{ slug: "/", displayName: "Home" }}
+          data={{ slug: "/", title: "Home" }}
           isActive={"/" === pathname}
           isMobile={props.isMobile}
         />
       )}
-      {props.data?.map((navLink, index) => {
-        const isActive = `/${navLink.slug}` === pathname
-        return (
-          <NavLink
-            key={navLink.slug}
-            index={index}
-            data={navLink}
-            isActive={isActive}
-            isMobile={props.isMobile}
-          />
-        )
-      })}
+      {props.data
+        ?.filter((navLink) => !navLink.hidden)
+        .map((navLink, index) => {
+          const isActive = `/${navLink.slug}` === pathname
+          return (
+            <NavLink
+              key={navLink.slug}
+              index={index}
+              data={navLink}
+              isActive={isActive}
+              isMobile={props.isMobile}
+            />
+          )
+        })}
     </ul>
   )
 }
@@ -68,7 +71,7 @@ function NavLink(props: NavLinkProps) {
         >
           {(props.index + 1).toString().padStart(2, "0")}.
         </div>
-        <div>{props.data.displayName}</div>
+        <div>{props.data.title}</div>
       </Link>
     </li>
   )
