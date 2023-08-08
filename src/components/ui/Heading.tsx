@@ -9,7 +9,7 @@ type HeadingProps = {
 }
 
 const Heading = ({ level, children, className }: HeadingProps) => {
-  const baseClasses = " "
+  const baseClasses = "mt-8 md:mt-10"
 
   const levelClasses = {
     h1: "font-medium tracking-tight text-3xl md:text-5xl my-5",
