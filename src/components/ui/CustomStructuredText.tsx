@@ -14,7 +14,7 @@ import { SocialLink } from "@/types"
 import Heading from "./Heading"
 import Paragraph from "./Paragraph"
 
-const CustomStructuredText = (props: StructuredTextPropTypes) => {
+const CustomStructuredText = (props: any) => {
   return (
     <StructuredText
       data={props.data}
