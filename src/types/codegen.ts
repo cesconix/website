@@ -1,4 +1,5 @@
 import { GraphQLClient } from "graphql-request"
+import { RequestInit } from "graphql-request/dist/types.dom"
 import { useQuery, UseQueryOptions } from "@tanstack/react-query"
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
@@ -47,6 +48,7 @@ export type Scalars = {
   FloatType: { input: number; output: number }
   IntType: { input: number; output: number }
   ItemId: { input: string; output: string }
+  JsonField: { input: unknown; output: unknown }
   MetaTagAttributes: {
     input: Record<string, string>
     output: Record<string, string>
@@ -54,75 +56,10 @@ export type Scalars = {
   UploadId: { input: string; output: string }
 }
 
-export type AltFileField = FileFieldInterface & {
-  _createdAt: Scalars["DateTime"]["output"]
-  /** Editing URL */
-  _editingUrl?: Maybe<Scalars["String"]["output"]>
-  _updatedAt: Scalars["DateTime"]["output"]
-  alt: Scalars["String"]["output"]
-  author?: Maybe<Scalars["String"]["output"]>
-  basename: Scalars["String"]["output"]
-  blurUpThumb?: Maybe<Scalars["String"]["output"]>
-  blurhash?: Maybe<Scalars["String"]["output"]>
-  colors: Array<ColorField>
-  copyright?: Maybe<Scalars["String"]["output"]>
-  customData: Scalars["CustomData"]["output"]
-  exifInfo: Scalars["CustomData"]["output"]
-  filename: Scalars["String"]["output"]
-  focalPoint?: Maybe<FocalPoint>
-  format: Scalars["String"]["output"]
-  height?: Maybe<Scalars["IntType"]["output"]>
-  id: Scalars["UploadId"]["output"]
-  md5: Scalars["String"]["output"]
-  mimeType: Scalars["String"]["output"]
-  notes?: Maybe<Scalars["String"]["output"]>
-  responsiveImage?: Maybe<ResponsiveImage>
-  size: Scalars["IntType"]["output"]
-  smartTags: Array<Scalars["String"]["output"]>
-  tags: Array<Scalars["String"]["output"]>
-  thumbhash?: Maybe<Scalars["String"]["output"]>
-  title?: Maybe<Scalars["String"]["output"]>
-  url: Scalars["String"]["output"]
-  video?: Maybe<UploadVideoField>
-  width?: Maybe<Scalars["IntType"]["output"]>
-}
-
-export type AltFileFieldAltArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-  locale?: InputMaybe<SiteLocale>
-}
-
-export type AltFileFieldBlurUpThumbArgs = {
-  imgixParams?: InputMaybe<ImgixParams>
-  punch?: Scalars["Float"]["input"]
-  quality?: Scalars["Int"]["input"]
-  size?: Scalars["Int"]["input"]
-}
-
-export type AltFileFieldCustomDataArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-  locale?: InputMaybe<SiteLocale>
-}
-
-export type AltFileFieldFocalPointArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-  locale?: InputMaybe<SiteLocale>
-}
-
-export type AltFileFieldResponsiveImageArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-  imgixParams?: InputMaybe<ImgixParams>
-  locale?: InputMaybe<SiteLocale>
-  sizes?: InputMaybe<Scalars["String"]["input"]>
-}
-
-export type AltFileFieldTitleArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-  locale?: InputMaybe<SiteLocale>
-}
-
-export type AltFileFieldUrlArgs = {
-  imgixParams?: InputMaybe<ImgixParams>
+/** Specifies how to filter Boolean fields */
+export type BooleanFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars["BooleanType"]["input"]>
 }
 
 export type CollectionMetadata = {
@@ -171,13 +108,29 @@ export type CommonRecord = RecordInterface & {
   cvFile?: Maybe<FileField>
   id: Scalars["ItemId"]["output"]
   logo: FileField
-  navLinks: Array<NavLinkRecord>
-  socialLinks: Array<SocialLinkRecord>
 }
 
 /** Record of type Common (common) */
 export type CommonRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>
+}
+
+/** Specifies how to filter by creation datetime */
+export type CreatedAtFilter = {
+  /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  eq?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gt?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gte?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lt?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lte?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  neq?: InputMaybe<Scalars["DateTime"]["input"]>
 }
 
 export enum FaviconType {
@@ -336,17 +289,19 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars["String"]["output"]>
 }
 
-/** Record of type Home Page (home_page) */
-export type HomePageRecord = RecordInterface & {
-  _allShortBioLocales?: Maybe<Array<StringNonNullMultiLocaleField>>
-  _allTaglineLocales?: Maybe<Array<StringNonNullMultiLocaleField>>
-  _allWelcomeLocales?: Maybe<Array<StringNonNullMultiLocaleField>>
+export type HeroProfileModelShortBioField = {
+  blocks: Array<HeroProfileRecord>
+  links: Array<Scalars["String"]["output"]>
+  value: Scalars["JsonField"]["output"]
+}
+
+/** Block of type HeroProfile (hero_profile) */
+export type HeroProfileRecord = RecordInterface & {
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
   _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
   _isValid: Scalars["BooleanType"]["output"]
-  _locales: Array<SiteLocale>
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -356,48 +311,15 @@ export type HomePageRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
   fullname: Scalars["String"]["output"]
-  gallery: Array<AltFileField>
   id: Scalars["ItemId"]["output"]
-  shortBio: Scalars["String"]["output"]
+  shortBio: HeroProfileModelShortBioField
+  socialLinks: Array<SocialLinkRecord>
   tagline: Scalars["String"]["output"]
   welcome: Scalars["String"]["output"]
 }
 
-/** Record of type Home Page (home_page) */
-export type HomePageRecord_AllShortBioLocalesArgs = {
-  markdown?: InputMaybe<Scalars["Boolean"]["input"]>
-}
-
-/** Record of type Home Page (home_page) */
-export type HomePageRecord_AllTaglineLocalesArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-}
-
-/** Record of type Home Page (home_page) */
-export type HomePageRecord_AllWelcomeLocalesArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-}
-
-/** Record of type Home Page (home_page) */
-export type HomePageRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>
-}
-
-/** Record of type Home Page (home_page) */
-export type HomePageRecordShortBioArgs = {
-  locale?: InputMaybe<SiteLocale>
-  markdown?: InputMaybe<Scalars["Boolean"]["input"]>
-}
-
-/** Record of type Home Page (home_page) */
-export type HomePageRecordTaglineArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
-  locale?: InputMaybe<SiteLocale>
-}
-
-/** Record of type Home Page (home_page) */
-export type HomePageRecordWelcomeArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>
+/** Block of type HeroProfile (hero_profile) */
+export type HeroProfileRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>
 }
 
@@ -1821,6 +1743,18 @@ export type InUseFilter = {
   eq?: InputMaybe<Scalars["BooleanType"]["input"]>
 }
 
+/** Specifies how to filter by ID */
+export type ItemIdFilter = {
+  /** Search the record with the specified ID */
+  eq?: InputMaybe<Scalars["ItemId"]["input"]>
+  /** Search records with the specified IDs */
+  in?: InputMaybe<Array<InputMaybe<Scalars["ItemId"]["input"]>>>
+  /** Exclude the record with the specified ID */
+  neq?: InputMaybe<Scalars["ItemId"]["input"]>
+  /** Search records that do not have the specified IDs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars["ItemId"]["input"]>>>
+}
+
 export enum ItemStatus {
   Draft = "draft",
   Published = "published",
@@ -1833,8 +1767,70 @@ export enum MuxThumbnailFormatType {
   Png = "png"
 }
 
-/** Block of type Nav Link (nav_link) */
-export type NavLinkRecord = RecordInterface & {
+/** Specifies how to filter by image orientation */
+export type OrientationFilter = {
+  /** Search uploads with the specified orientation */
+  eq?: InputMaybe<UploadOrientation>
+  /** Exclude uploads with the specified orientation */
+  neq?: InputMaybe<UploadOrientation>
+}
+
+export type PageModelContentBlocksField = HeroProfileRecord | SocialLinkRecord
+
+export type PageModelContentField = {
+  blocks: Array<PageModelContentBlocksField>
+  links: Array<Scalars["String"]["output"]>
+  value: Scalars["JsonField"]["output"]
+}
+
+export type PageModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PageModelFilter>>>
+  OR?: InputMaybe<Array<InputMaybe<PageModelFilter>>>
+  _createdAt?: InputMaybe<CreatedAtFilter>
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>
+  _isValid?: InputMaybe<BooleanFilter>
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>
+  _publishedAt?: InputMaybe<PublishedAtFilter>
+  _status?: InputMaybe<StatusFilter>
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>
+  _updatedAt?: InputMaybe<UpdatedAtFilter>
+  content?: InputMaybe<StructuredTextFilter>
+  hidden?: InputMaybe<BooleanFilter>
+  id?: InputMaybe<ItemIdFilter>
+  position?: InputMaybe<PositionFilter>
+  slug?: InputMaybe<SlugFilter>
+  title?: InputMaybe<StringFilter>
+}
+
+export enum PageModelOrderBy {
+  CreatedAtAsc = "_createdAt_ASC",
+  CreatedAtDesc = "_createdAt_DESC",
+  FirstPublishedAtAsc = "_firstPublishedAt_ASC",
+  FirstPublishedAtDesc = "_firstPublishedAt_DESC",
+  IsValidAsc = "_isValid_ASC",
+  IsValidDesc = "_isValid_DESC",
+  PublicationScheduledAtAsc = "_publicationScheduledAt_ASC",
+  PublicationScheduledAtDesc = "_publicationScheduledAt_DESC",
+  PublishedAtAsc = "_publishedAt_ASC",
+  PublishedAtDesc = "_publishedAt_DESC",
+  StatusAsc = "_status_ASC",
+  StatusDesc = "_status_DESC",
+  UnpublishingScheduledAtAsc = "_unpublishingScheduledAt_ASC",
+  UnpublishingScheduledAtDesc = "_unpublishingScheduledAt_DESC",
+  UpdatedAtAsc = "_updatedAt_ASC",
+  UpdatedAtDesc = "_updatedAt_DESC",
+  HiddenAsc = "hidden_ASC",
+  HiddenDesc = "hidden_DESC",
+  IdAsc = "id_ASC",
+  IdDesc = "id_DESC",
+  PositionAsc = "position_ASC",
+  PositionDesc = "position_DESC",
+  TitleAsc = "title_ASC",
+  TitleDesc = "title_DESC"
+}
+
+/** Record of type Page (page) */
+export type PageRecord = RecordInterface & {
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
@@ -1848,38 +1844,77 @@ export type NavLinkRecord = RecordInterface & {
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
-  displayName: Scalars["String"]["output"]
+  content?: Maybe<PageModelContentField>
+  hidden?: Maybe<Scalars["BooleanType"]["output"]>
   id: Scalars["ItemId"]["output"]
+  position?: Maybe<Scalars["IntType"]["output"]>
   slug: Scalars["String"]["output"]
+  title: Scalars["String"]["output"]
 }
 
-/** Block of type Nav Link (nav_link) */
-export type NavLinkRecord_SeoMetaTagsArgs = {
+/** Record of type Page (page) */
+export type PageRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>
 }
 
-/** Specifies how to filter by image orientation */
-export type OrientationFilter = {
-  /** Search uploads with the specified orientation */
-  eq?: InputMaybe<UploadOrientation>
-  /** Exclude uploads with the specified orientation */
-  neq?: InputMaybe<UploadOrientation>
+/** Specifies how to filter by position (sorted and tree-like collections) */
+export type PositionFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars["IntType"]["input"]>
+  /** Filter records with a value that's strictly greater than the one specified */
+  gt?: InputMaybe<Scalars["IntType"]["input"]>
+  /** Filter records with a value that's greater than or equal to the one specified */
+  gte?: InputMaybe<Scalars["IntType"]["input"]>
+  /** Filter records with a value that's less than the one specified */
+  lt?: InputMaybe<Scalars["IntType"]["input"]>
+  /** Filter records with a value that's less or equal than the one specified */
+  lte?: InputMaybe<Scalars["IntType"]["input"]>
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars["IntType"]["input"]>
+}
+
+/** Specifies how to filter by publication datetime */
+export type PublishedAtFilter = {
+  /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  eq?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gt?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gte?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lt?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lte?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  neq?: InputMaybe<Scalars["DateTime"]["input"]>
 }
 
 /** The query root for this schema */
 export type Query = {
+  /** Returns meta information regarding a record collection */
+  _allPagesMeta: CollectionMetadata
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata
   /** Returns the single instance record */
   _site: Site
+  /** Returns a collection of records */
+  allPages: Array<PageRecord>
   /** Returns a collection of assets */
   allUploads: Array<FileField>
   /** Returns the single instance record */
   common?: Maybe<CommonRecord>
-  /** Returns the single instance record */
-  homePage?: Maybe<HomePageRecord>
+  /** Returns a specific record */
+  page?: Maybe<PageRecord>
   /** Returns a specific asset */
   upload?: Maybe<FileField>
+}
+
+/** The query root for this schema */
+export type Query_AllPagesMetaArgs = {
+  filter?: InputMaybe<PageModelFilter>
+  locale?: InputMaybe<SiteLocale>
 }
 
 /** The query root for this schema */
@@ -1892,6 +1927,16 @@ export type Query_AllUploadsMetaArgs = {
 export type Query_SiteArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>
   locale?: InputMaybe<SiteLocale>
+}
+
+/** The query root for this schema */
+export type QueryAllPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>
+  filter?: InputMaybe<PageModelFilter>
+  first?: InputMaybe<Scalars["IntType"]["input"]>
+  locale?: InputMaybe<SiteLocale>
+  orderBy?: InputMaybe<Array<InputMaybe<PageModelOrderBy>>>
+  skip?: InputMaybe<Scalars["IntType"]["input"]>
 }
 
 /** The query root for this schema */
@@ -1911,9 +1956,11 @@ export type QueryCommonArgs = {
 }
 
 /** The query root for this schema */
-export type QueryHomePageArgs = {
+export type QueryPageArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>
+  filter?: InputMaybe<PageModelFilter>
   locale?: InputMaybe<SiteLocale>
+  orderBy?: InputMaybe<Array<InputMaybe<PageModelOrderBy>>>
 }
 
 /** The query root for this schema */
@@ -2005,6 +2052,18 @@ export enum SiteLocale {
   En = "en"
 }
 
+/** Specifies how to filter Slug fields */
+export type SlugFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars["String"]["input"]>
+  /** Filter records that have one of the specified slugs */
+  in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars["String"]["input"]>
+  /** Filter records that do have one of the specified slugs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>
+}
+
 /** Block of type Social Link (social_link) */
 export type SocialLinkRecord = RecordInterface & {
   _createdAt: Scalars["DateTime"]["output"]
@@ -2031,15 +2090,58 @@ export type SocialLinkRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>
 }
 
+/** Specifies how to filter by status */
+export type StatusFilter = {
+  /** Search the record with the specified status */
+  eq?: InputMaybe<ItemStatus>
+  /** Search records with the specified statuses */
+  in?: InputMaybe<Array<InputMaybe<ItemStatus>>>
+  /** Exclude the record with the specified status */
+  neq?: InputMaybe<ItemStatus>
+  /** Search records without the specified statuses */
+  notIn?: InputMaybe<Array<InputMaybe<ItemStatus>>>
+}
+
+/** Specifies how to filter Single-line string fields */
+export type StringFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars["String"]["input"]>
+  /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
+  exists?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records that equal one of the specified values */
+  in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>
+  /** Filter records with the specified field set as blank (null or empty string) */
+  isBlank?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records with the specified field present (neither null, nor empty string) */
+  isPresent?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records based on a regular expression */
+  matches?: InputMaybe<StringMatchesFilter>
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars["String"]["input"]>
+  /** Filter records that do not equal one of the specified values */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>
+  /** Exclude records based on a regular expression */
+  notMatches?: InputMaybe<StringMatchesFilter>
+}
+
 export type StringMatchesFilter = {
   caseSensitive?: InputMaybe<Scalars["BooleanType"]["input"]>
   pattern: Scalars["String"]["input"]
   regexp?: InputMaybe<Scalars["BooleanType"]["input"]>
 }
 
-export type StringNonNullMultiLocaleField = {
-  locale?: Maybe<SiteLocale>
-  value: Scalars["String"]["output"]
+/** Specifies how to filter Structured Text fields */
+export type StructuredTextFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
+  exists?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records with the specified field set as blank (null or single empty paragraph) */
+  isBlank?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records with the specified field present (neither null, nor empty string) */
+  isPresent?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records based on a regular expression */
+  matches?: InputMaybe<StringMatchesFilter>
+  /** Exclude records based on a regular expression */
+  notMatches?: InputMaybe<StringMatchesFilter>
 }
 
 export type Tag = {
@@ -2058,6 +2160,24 @@ export type TypeFilter = {
   neq?: InputMaybe<UploadType>
   /** Search uploads without the specified types */
   notIn?: InputMaybe<Array<InputMaybe<UploadType>>>
+}
+
+/** Specifies how to filter by update datetime */
+export type UpdatedAtFilter = {
+  /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  eq?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gt?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gte?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lt?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lte?: InputMaybe<Scalars["DateTime"]["input"]>
+  /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  neq?: InputMaybe<Scalars["DateTime"]["input"]>
 }
 
 /** Specifies how to filter by default alt */
@@ -2398,94 +2518,148 @@ export type FocalPoint = {
   y: Scalars["FloatType"]["output"]
 }
 
-export type HomePageQueryVariables = Exact<{ [key: string]: never }>
+export type AllSlugsQueryVariables = Exact<{ [key: string]: never }>
 
-export type HomePageQuery = {
-  homePage?: {
-    welcome: string
-    fullname: string
-    tagline: string
-    shortBio: string
-    gallery: Array<{ url: string; alt: string }>
+export type AllSlugsQuery = { allPages: Array<{ slug: string }> }
+
+export type PageQueryVariables = Exact<{
+  slug: SlugFilter
+}>
+
+export type PageQuery = {
+  page?: {
+    title: string
+    slug: string
+    content?: {
+      value: unknown
+      blocks: Array<
+        | {
+            __typename: "HeroProfileRecord"
+            id: string
+            welcome: string
+            fullname: string
+            tagline: string
+            shortBio: { value: unknown }
+            socialLinks: Array<{
+              key: string
+              url: string
+              displayName: string
+            }>
+          }
+        | { __typename: "SocialLinkRecord" }
+      >
+    } | null
   } | null
-  common?: {
-    logo: { url: string }
-    navLinks: Array<{ displayName: string; slug: string }>
-    cvFile?: { url: string } | null
-    socialLinks: Array<{ displayName: string; key: string; url: string }>
-  } | null
+  common?: { logo: { url: string }; cvFile?: { url: string } | null } | null
+  allPages: Array<{ slug: string; title: string; hidden?: boolean | null }>
 }
 
-export type CommonFragment = {
-  logo: { url: string }
-  navLinks: Array<{ displayName: string; slug: string }>
-  cvFile?: { url: string } | null
-  socialLinks: Array<{ displayName: string; key: string; url: string }>
-}
-
-export const CommonFragmentDoc = `
-    fragment Common on CommonRecord {
-  logo {
-    url
-  }
-  navLinks {
-    displayName
+export const AllSlugsDocument = `
+    query AllSlugs {
+  allPages {
     slug
-  }
-  cvFile {
-    url
-  }
-  socialLinks {
-    displayName
-    key
-    url
   }
 }
     `
-export const HomePageDocument = `
-    query HomePage {
-  homePage {
-    welcome
-    fullname
-    tagline
-    shortBio(markdown: true)
-    gallery {
-      url
-      alt
-    }
-  }
-  common {
-    ...Common
-  }
-}
-    ${CommonFragmentDoc}`
-export const useHomePageQuery = <TData = HomePageQuery, TError = unknown>(
+export const useAllSlugsQuery = <TData = AllSlugsQuery, TError = unknown>(
   client: GraphQLClient,
-  variables?: HomePageQueryVariables,
-  options?: UseQueryOptions<HomePageQuery, TError, TData>,
+  variables?: AllSlugsQueryVariables,
+  options?: UseQueryOptions<AllSlugsQuery, TError, TData>,
   headers?: RequestInit["headers"]
 ) =>
-  useQuery<HomePageQuery, TError, TData>(
-    variables === undefined ? ["HomePage"] : ["HomePage", variables],
-    fetcher<HomePageQuery, HomePageQueryVariables>(
+  useQuery<AllSlugsQuery, TError, TData>(
+    variables === undefined ? ["AllSlugs"] : ["AllSlugs", variables],
+    fetcher<AllSlugsQuery, AllSlugsQueryVariables>(
       client,
-      HomePageDocument,
+      AllSlugsDocument,
       variables,
       headers
     ),
     options
   )
 
-useHomePageQuery.getKey = (variables?: HomePageQueryVariables) =>
-  variables === undefined ? ["HomePage"] : ["HomePage", variables]
-useHomePageQuery.fetcher = (
+useAllSlugsQuery.getKey = (variables?: AllSlugsQueryVariables) =>
+  variables === undefined ? ["AllSlugs"] : ["AllSlugs", variables]
+useAllSlugsQuery.fetcher = (
   client: GraphQLClient,
-  variables?: HomePageQueryVariables,
+  variables?: AllSlugsQueryVariables,
   headers?: RequestInit["headers"]
 ) =>
-  fetcher<HomePageQuery, HomePageQueryVariables>(
+  fetcher<AllSlugsQuery, AllSlugsQueryVariables>(
     client,
-    HomePageDocument,
+    AllSlugsDocument,
+    variables,
+    headers
+  )
+export const PageDocument = `
+    query Page($slug: SlugFilter!) {
+  page(filter: {slug: $slug}) {
+    title
+    slug
+    content {
+      value
+      blocks {
+        __typename
+        ... on HeroProfileRecord {
+          id
+          welcome
+          fullname
+          tagline
+          shortBio {
+            value
+          }
+          socialLinks {
+            key
+            url
+            displayName
+          }
+        }
+      }
+    }
+  }
+  common {
+    ... on CommonRecord {
+      logo {
+        url
+      }
+      cvFile {
+        url
+      }
+    }
+  }
+  allPages {
+    slug
+    title
+    hidden
+  }
+}
+    `
+export const usePageQuery = <TData = PageQuery, TError = unknown>(
+  client: GraphQLClient,
+  variables: PageQueryVariables,
+  options?: UseQueryOptions<PageQuery, TError, TData>,
+  headers?: RequestInit["headers"]
+) =>
+  useQuery<PageQuery, TError, TData>(
+    ["Page", variables],
+    fetcher<PageQuery, PageQueryVariables>(
+      client,
+      PageDocument,
+      variables,
+      headers
+    ),
+    options
+  )
+
+usePageQuery.getKey = (variables: PageQueryVariables) => ["Page", variables]
+usePageQuery.fetcher = (
+  client: GraphQLClient,
+  variables: PageQueryVariables,
+  headers?: RequestInit["headers"]
+) =>
+  fetcher<PageQuery, PageQueryVariables>(
+    client,
+    PageDocument,
     variables,
     headers
   )

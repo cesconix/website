@@ -38,7 +38,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-space)"]
+        space: ["var(--font-space)"],
+        inter: ["var(--font-inter)"]
       }
     },
     colors: {

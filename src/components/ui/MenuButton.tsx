@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
-import * as Dialog from "@radix-ui/react-dialog"
-import HamburgerMenuIcon from "./HamburgerMenuIcon"
-import { NavLink } from "@/types"
-import NavLinks from "./NavLinks"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import CloseIcon from "./CloseIcon"
+import * as Dialog from "@radix-ui/react-dialog"
 
-type HamburgerMenuProps = {
+import { NavLink } from "@/types"
+import { CloseIcon, MenuIcon } from "@/components/icons"
+import NavLinks from "./NavLinks"
+
+type MenuButtonProps = {
   navLinks: NavLink[]
 }
 
-function HamburgerMenu(props: HamburgerMenuProps) {
+function MenuButton(props: MenuButtonProps) {
   const router = useRouter()
 
   const [open, setOpen] = useState(false)
@@ -34,7 +34,7 @@ function HamburgerMenu(props: HamburgerMenuProps) {
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
           <button className="text-foreground-100">
-            <HamburgerMenuIcon />
+            <MenuIcon />
           </button>
         </Dialog.Trigger>
         <Dialog.Portal container={container}>
@@ -63,4 +63,4 @@ function HamburgerMenu(props: HamburgerMenuProps) {
   )
 }
 
-export default HamburgerMenu
+export default MenuButton

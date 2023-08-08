@@ -1,6 +1,7 @@
 export type NavLink = {
-  displayName: string
+  title: string
   slug: string
+  hidden?: boolean | null
 }
 
 export type SocialLink = {

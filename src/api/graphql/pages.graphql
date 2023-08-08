@@ -1,0 +1,47 @@
+query AllSlugs {
+  allPages {
+    slug
+  }
+}
+
+query Page($slug: SlugFilter!) {
+  page(filter: { slug: $slug }) {
+    title
+    slug
+    content {
+      value
+      blocks {
+        __typename
+        ... on HeroProfileRecord {
+          id
+          welcome
+          fullname
+          tagline
+          shortBio {
+            value
+          }
+          socialLinks {
+            key
+            url
+            displayName
+          }
+        }
+      }
+    }
+  }
+  common {
+    ... on CommonRecord {
+      logo {
+        url
+      }
+      cvFile {
+        url
+      }
+    }
+  }
+  allPages {
+    slug
+    title
+    hidden
+  }
+}
