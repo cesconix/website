@@ -1,5 +1,7 @@
 import {
+  Image,
   renderNodeRule,
+  ResponsiveImageType,
   StructuredText,
   StructuredTextPropTypes
 } from "react-datocms"
@@ -42,7 +44,13 @@ const CustomStructuredText = (props: any) => {
                 socialLinks={record.socialLinks as SocialLink[]}
               />
             )
-
+          case "HeroImageRecord":
+            return (
+              <Image
+                className="my-4"
+                data={(record.image as any).responsiveImage}
+              />
+            )
           default:
             return null
         }
