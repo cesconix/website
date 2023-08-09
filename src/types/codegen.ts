@@ -288,6 +288,30 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars["String"]["output"]>
 }
 
+/** Block of type HeroImage (hero_image) */
+export type HeroImageRecord = RecordInterface & {
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  _isValid: Scalars["BooleanType"]["output"]
+  _modelApiKey: Scalars["String"]["output"]
+  _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>
+  _status: ItemStatus
+  _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  id: Scalars["ItemId"]["output"]
+  image: FileField
+}
+
+/** Block of type HeroImage (hero_image) */
+export type HeroImageRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>
+}
+
 export type HeroProfileModelShortBioField = {
   blocks: Array<HeroProfileRecord>
   links: Array<Scalars["String"]["output"]>
@@ -1774,7 +1798,10 @@ export type OrientationFilter = {
   neq?: InputMaybe<UploadOrientation>
 }
 
-export type PageModelContentBlocksField = HeroProfileRecord | SocialLinkRecord
+export type PageModelContentBlocksField =
+  | HeroImageRecord
+  | HeroProfileRecord
+  | SocialLinkRecord
 
 export type PageModelContentField = {
   blocks: Array<PageModelContentBlocksField>
@@ -2533,6 +2560,24 @@ export type PageQuery = {
       value: unknown
       blocks: Array<
         | {
+            __typename: "HeroImageRecord"
+            id: string
+            image: {
+              responsiveImage?: {
+                srcSet: string
+                webpSrcSet: string
+                sizes: string
+                src: string
+                width: number
+                height: number
+                aspectRatio: number
+                alt?: string | null
+                title?: string | null
+                base64?: string | null
+              } | null
+            }
+          }
+        | {
             __typename: "HeroProfileRecord"
             id: string
             welcome: string
@@ -2611,6 +2656,23 @@ export const PageDocument = `
             key
             url
             displayName
+          }
+        }
+        ... on HeroImageRecord {
+          id
+          image {
+            responsiveImage(imgixParams: {auto: format}) {
+              srcSet
+              webpSrcSet
+              sizes
+              src
+              width
+              height
+              aspectRatio
+              alt
+              title
+              base64
+            }
           }
         }
       }

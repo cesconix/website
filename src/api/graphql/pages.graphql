@@ -26,6 +26,23 @@ query Page($slug: SlugFilter!) {
             displayName
           }
         }
+        ... on HeroImageRecord {
+          id
+          image {
+            responsiveImage(imgixParams: { auto: format }) {
+              srcSet
+              webpSrcSet
+              sizes
+              src
+              width
+              height
+              aspectRatio
+              alt
+              title
+              base64
+            }
+          }
+        }
       }
     }
   }
