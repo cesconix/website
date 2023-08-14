@@ -25,6 +25,10 @@ export default async function handler(
 ) {
   await runMiddleware(req, res, cors)
 
+  if (req.method === "OPTIONS") {
+    return res.status(200).send("ok")
+  }
+
   const { slug } = req.body.item?.attributes
   const baseUrl = process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
 
