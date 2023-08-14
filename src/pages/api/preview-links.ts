@@ -29,7 +29,7 @@ export default async function handler(
     return res.status(200).send("ok")
   }
 
-  const { slug } = req.body.item?.attributes
+  const slug = req.body.item?.attributes?.slug
   const baseUrl = process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
 
   if (!slug || !baseUrl) {
