@@ -42,7 +42,7 @@ export default function Page(
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="mx-auto flex max-w-3xl flex-col px-6 md:px-10">
+      <main className="mx-auto max-w-3xl px-6 md:px-10">
         <CustomStructuredText data={props.page?.content} />
         {/*<div className="w-full columns-2 gap-4 md:columns-3">
           {props.homePage?.gallery.map((image, index) => {
