@@ -1,10 +1,18 @@
 import { GraphQLClient } from "graphql-request"
+import { GraphQLClientRequestHeaders } from "graphql-request/build/esm/types"
 
-export const graphqlClient = new GraphQLClient(
-  process.env.DATOCMS_GRAPHQL_URL!,
-  {
-    headers: {
-      Authorization: process.env.DATOCMS_GRAPHQL_TOKEN!
-    }
+export const createGraphqlClient = (draftMode: boolean = false) => {
+  const headers: GraphQLClientRequestHeaders = {
+    Authorization: process.env.DATOCMS_GRAPHQL_TOKEN!
   }
-)
+
+  if (draftMode) {
+    headers["X-Include-Drafts"] = "true"
+  }
+
+  const client = new GraphQLClient(process.env.DATOCMS_GRAPHQL_URL!, {
+    headers
+  })
+
+  return client
+}
