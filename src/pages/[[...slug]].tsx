@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<PageQuery> = async (context) => {
 
   return {
     props: page,
-    revalidate: 10
+    revalidate: 120
   }
 }
 

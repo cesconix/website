@@ -10,8 +10,6 @@ export const createGraphqlClient = (draftMode: boolean = false) => {
     headers["X-Include-Drafts"] = "true"
   }
 
-  console.log(headers)
-
   const client = new GraphQLClient(process.env.DATOCMS_GRAPHQL_URL!, {
     headers
   })
