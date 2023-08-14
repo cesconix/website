@@ -39,11 +39,11 @@ export default async function handler(
   const previewLinks = [
     {
       label: "Published version",
-      url: `${baseUrl}/api/draft?slug=/${slug}`
+      url: `${baseUrl}/api/draft?slug=/${slug}&secret=${process.env.SECRET_TOKEN}`
     },
     {
       label: "Draft version",
-      url: `${baseUrl}/api/draft?enable&slug=/${slug}`
+      url: `${baseUrl}/api/draft?enable&slug=/${slug}&secret=${process.env.SECRET_TOKEN}`
     }
   ]
 
