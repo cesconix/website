@@ -1,10 +1,4 @@
-import {
-  Image,
-  renderNodeRule,
-  ResponsiveImageType,
-  StructuredText,
-  StructuredTextPropTypes
-} from "react-datocms"
+import { Image, renderNodeRule, StructuredText } from "react-datocms"
 import {
   isHeading,
   isParagraph,
@@ -23,7 +17,7 @@ const CustomStructuredText = (props: any) => {
       customNodeRules={[
         renderNodeRule(isHeading, ({ node, children, key }) => {
           return (
-            <Heading key={key} level={`h${node.level}`}>
+            <Heading key={key} level={`h${node.level}`} className="font-black">
               {children}
             </Heading>
           )
@@ -45,11 +39,20 @@ const CustomStructuredText = (props: any) => {
               />
             )
           case "HeroImageRecord":
+            const imageTitle = (record.image as any).responsiveImage.title
             return (
-              <Image
-                className="my-4"
-                data={(record.image as any).responsiveImage}
-              />
+              <div
+                className={`my-4 flex flex-col items-center ${
+                  imageTitle && "mt-8"
+                }`}
+              >
+                <Image data={(record.image as any).responsiveImage} />
+                {imageTitle && (
+                  <p className="mt-3 text-center font-space text-xs text-foreground-600 md:text-sm">
+                    {imageTitle}
+                  </p>
+                )}
+              </div>
             )
           default:
             return null
