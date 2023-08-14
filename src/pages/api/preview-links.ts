@@ -1,11 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import Cors from "cors"
 
-const cors = Cors({
-  origin: "*",
-  methods: ["POST"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-})
+const cors = Cors()
 
 function runMiddleware(
   req: NextApiRequest,
