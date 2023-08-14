@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  res.setHeader("Access-Control-Allow-Credentials", "true")
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Access-Control-Allow-Methods", "POST")
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
@@ -11,7 +12,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   )
 
   if (req.method === "OPTIONS") {
-    return res.status(200).send("ok")
+    return res.status(200).end()
   }
 
   const { slug } = req.body.item?.attributes
