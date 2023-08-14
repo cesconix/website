@@ -43,7 +43,7 @@ function Header(props: HeaderProps) {
         <div className="rounded-2xl border-[1px] border-solid border-primary-600 p-[2px]">
           <Image
             src={props.logoUrl}
-            alt="Description of the image"
+            alt="Francesco Pasqua website logo"
             width={36}
             height={36}
             className="rounded-[14px]"

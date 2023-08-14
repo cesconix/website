@@ -17,7 +17,7 @@ const CustomStructuredText = (props: any) => {
       customNodeRules={[
         renderNodeRule(isHeading, ({ node, children, key }) => {
           return (
-            <Heading key={key} level={`h${node.level}`} className="font-black">
+            <Heading key={key} level={`h${node.level}`} className="">
               {children}
             </Heading>
           )

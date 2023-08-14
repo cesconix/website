@@ -19,7 +19,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<PageQuery> = async (context) => {
+export const getStaticProps: GetStaticProps<{
+  pageQuery: PageQuery
+  draftMode?: boolean | null
+}> = async (context) => {
   const graphqlClient = createGraphqlClient(context.draftMode)
 
   const page = await usePageQuery.fetcher(graphqlClient, {
@@ -27,7 +30,10 @@ export const getStaticProps: GetStaticProps<PageQuery> = async (context) => {
   })()
 
   return {
-    props: page,
+    props: {
+      pageQuery: page,
+      draftMode: context.draftMode || null
+    },
     revalidate: 120
   }
 }
@@ -38,34 +44,13 @@ export default function Page(
   return (
     <>
       <Head>
-        <title>{props.page?.title} | Francesco Pasqua</title>
+        <title>{props.pageQuery?.page?.title} | Francesco Pasqua</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="mx-auto max-w-3xl px-6 md:px-10">
-        <CustomStructuredText data={props.page?.content} />
-        {/*<div className="w-full columns-2 gap-4 md:columns-3">
-          {props.homePage?.gallery.map((image, index) => {
-            const isShort =
-              index % 6 === 0 || index % 6 === 3 || index % 6 === 4
-            return (
-              <div
-                className={`relative mb-4 ${isShort ? "h-40" : "h-80"}`}
-                key={index}
-              >
-                <Image
-                  src={image.url}
-                  fill
-                  priority
-                  alt="Description of the image"
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 213px, 33vw"
-                />
-              </div>
-            )
-          })}
-        </div>*/}
+        <CustomStructuredText data={props.pageQuery?.page?.content} />
       </main>
     </>
   )

@@ -2,6 +2,7 @@ import { Space_Grotesk, Inter } from "next/font/google"
 
 import { NavLink } from "@/types"
 import Header from "./Header"
+import { DraftMode } from "../ui"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ type CommonProps = {
 type LayoutProps = {
   children: React.ReactNode
   commonProps: CommonProps
+  draftMode: boolean | null
 }
 
 function Layout(props: LayoutProps) {
@@ -35,6 +37,7 @@ function Layout(props: LayoutProps) {
         cvFileUrl={props.commonProps.cvFileUrl}
       />
       {props.children}
+      {props.draftMode && <DraftMode />}
     </div>
   )
 }
