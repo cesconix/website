@@ -5,6 +5,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader("Access-Control-Allow-Methods", "POST")
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
   res.setHeader("Content-Type", "application/json")
+  res.setHeader(
+    "Content-Security-Policy",
+    "frame-ancestors 'self' https://plugins-cdn.datocms.com;"
+  )
 
   if (req.method === "OPTIONS") {
     return res.status(200).send("ok")
