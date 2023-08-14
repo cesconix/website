@@ -17,7 +17,7 @@ export default function App({
         cvFileUrl: pageProps.pageQuery?.common?.cvFile?.url
       }}
     >
-      <Component {...pageProps.pageQuery} />
+      <Component {...pageProps} />
     </Layout>
   )
 }
