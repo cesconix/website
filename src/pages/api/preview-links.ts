@@ -1,19 +1,33 @@
 import { NextApiRequest, NextApiResponse } from "next"
+import Cors from "cors"
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.setHeader("Access-Control-Allow-Credentials", "true")
-  res.setHeader("Access-Control-Allow-Origin", "*")
-  res.setHeader("Access-Control-Allow-Methods", "POST")
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
-  res.setHeader("Content-Type", "application/json")
-  res.setHeader(
-    "Content-Security-Policy",
-    "frame-ancestors 'self' https://plugins-cdn.datocms.com;"
-  )
+const cors = Cors({
+  origin: "*",
+  methods: ["POST"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+})
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end()
-  }
+function runMiddleware(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  fn: Function
+) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: any) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+
+      return resolve(result)
+    })
+  })
+}
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  await runMiddleware(req, res, cors)
 
   const { slug } = req.body.item?.attributes
   const baseUrl = process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
