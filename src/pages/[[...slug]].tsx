@@ -1,13 +1,12 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next"
 import Head from "next/head"
 import { PageQuery, useAllSlugsQuery, usePageQuery } from "@/types/codegen"
-
-import { graphqlClient } from "@/utils"
-import { StructuredText } from "react-datocms"
-import { AboutMe } from "@/components/blocks"
 import { CustomStructuredText } from "@/components/ui"
+import { createGraphqlClient } from "@/utils"
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const graphqlClient = createGraphqlClient()
+
   const { allPages } = await useAllSlugsQuery.fetcher(graphqlClient)()
 
   const paths = allPages.map((page) => ({
@@ -21,6 +20,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps<PageQuery> = async (context) => {
+  const graphqlClient = createGraphqlClient(context.draftMode)
+
   const page = await usePageQuery.fetcher(graphqlClient, {
     slug: { eq: context.params!.slug?.at(0) as string }
   })()
