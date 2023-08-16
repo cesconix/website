@@ -1,23 +1,18 @@
 import "@/styles/globals.css"
+
+import type { ReactElement, ReactNode } from "react"
+import type { NextPage } from "next"
 import type { AppProps } from "next/app"
 
-import { PageQuery } from "@/types/codegen"
-import { Layout } from "@/components/layout"
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement, pageProps: any) => ReactNode
+}
 
-export default function App({
-  Component,
-  pageProps
-}: AppProps<{ pageQuery: PageQuery; draftMode: boolean }>) {
-  return (
-    <Layout
-      draftMode={pageProps.draftMode}
-      commonProps={{
-        logoUrl: pageProps.pageQuery?.common?.logo.url as string,
-        navLinks: pageProps.pageQuery?.allPages,
-        cvFileUrl: pageProps.pageQuery?.common?.cvFile?.url
-      }}
-    >
-      <Component {...pageProps} />
-    </Layout>
-  )
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page)
+  return getLayout(<Component {...pageProps} />, pageProps)
 }

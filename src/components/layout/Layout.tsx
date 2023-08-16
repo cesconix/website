@@ -1,6 +1,5 @@
 import { Space_Grotesk, Inter } from "next/font/google"
-
-import { NavLink } from "@/types"
+import type { NavLink } from "@/types"
 import Header from "./Header"
 import { DraftMode } from "../ui"
 
@@ -23,13 +22,13 @@ type CommonProps = {
 type LayoutProps = {
   children: React.ReactNode
   commonProps: CommonProps
-  draftMode: boolean | null
+  draftMode: boolean
 }
 
 function Layout(props: LayoutProps) {
   return (
     <div
-      className={`${spaceGrotesk.variable} ${inter.variable} relative overflow-y-scroll font-space antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} relative overflow-y-scroll bg-neutral-700 font-space text-foreground-200 antialiased`}
     >
       <Header
         logoUrl={props.commonProps.logoUrl}
