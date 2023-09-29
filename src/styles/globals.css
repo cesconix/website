@@ -9,3 +9,7 @@ body {
 a {
   @apply text-primary-600 underline underline-offset-4;
 }
+
+p strong {
+  @apply text-foreground-100
+}

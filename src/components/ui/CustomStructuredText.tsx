@@ -41,18 +41,18 @@ const CustomStructuredText = (props: any) => {
           case "HeroImageRecord":
             const imageTitle = (record.image as any).responsiveImage.title
             return (
-              <div
-                className={`my-4 flex flex-col items-center ${
+              <figure
+                className={`my-3 flex flex-col items-center md:my-8 ${
                   imageTitle && "mt-8"
                 }`}
               >
                 <Image data={(record.image as any).responsiveImage} />
                 {imageTitle && (
-                  <p className="mt-3 text-center font-space text-xs text-foreground-600 md:text-sm">
+                  <figcaption className="mt-3 text-center font-space text-xs text-foreground-600 md:text-sm">
                     {imageTitle}
-                  </p>
+                  </figcaption>
                 )}
-              </div>
+              </figure>
             )
           default:
             return null

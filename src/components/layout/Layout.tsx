@@ -28,7 +28,7 @@ type LayoutProps = {
 function Layout(props: LayoutProps) {
   return (
     <div
-      className={`${spaceGrotesk.variable} ${inter.variable} relative overflow-y-scroll bg-neutral-700 font-space text-foreground-200 antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} relative overflow-y-scroll font-space`}
     >
       <Header
         logoUrl={props.commonProps.logoUrl}
