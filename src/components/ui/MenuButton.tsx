@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { NavLinkType } from "@/types"
 import * as Dialog from "@radix-ui/react-dialog"
 
-import { NavLink } from "@/types"
 import { CloseIcon, MenuIcon } from "@/components/icons"
+
 import NavLinks from "./NavLinks"
 
 type MenuButtonProps = {
-  navLinks: NavLink[]
+  navLinks: NavLinkType[]
 }
 
 function MenuButton(props: MenuButtonProps) {
@@ -22,10 +23,10 @@ function MenuButton(props: MenuButtonProps) {
       setOpen(false)
     }
 
-    router.events.on("routeChangeComplete", handleRouteComplete)
+    router.events.on("routeChangeStart", handleRouteComplete)
 
     return () => {
-      router.events.off("routeChangeComplete", handleRouteComplete)
+      router.events.off("routeChangeStart", handleRouteComplete)
     }
   }, [router])
 
@@ -48,7 +49,7 @@ function MenuButton(props: MenuButtonProps) {
             </Link>
             <Dialog.Close asChild>
               <button
-                className="absolute right-[32px] top-[26px] inline-flex h-10 w-10 appearance-none items-center justify-center focus:outline-none"
+                className="absolute right-[18px] top-[24px] inline-flex h-10 w-10 appearance-none items-center justify-center focus:outline-none"
                 aria-label="Close"
               >
                 <CloseIcon />

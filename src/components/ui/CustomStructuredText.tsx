@@ -1,12 +1,13 @@
-import { Image, renderNodeRule, StructuredText } from "react-datocms"
+import { SocialLink } from "@/types"
 import {
   isHeading,
   isParagraph,
   StructuredText as StructuredTextProps
 } from "datocms-structured-text-utils"
+import { Image, renderNodeRule, StructuredText } from "react-datocms"
 
 import { AboutMe } from "@/components/blocks"
-import { SocialLink } from "@/types"
+
 import Heading from "./Heading"
 import Paragraph from "./Paragraph"
 
@@ -42,7 +43,7 @@ const CustomStructuredText = (props: any) => {
             const imageTitle = (record.image as any).responsiveImage.title
             return (
               <figure
-                className={`my-3 flex flex-col items-center md:my-8 ${
+                className={`relative z-[-1] my-3 flex flex-col items-center md:my-8 ${
                   imageTitle && "mt-8"
                 }`}
               >

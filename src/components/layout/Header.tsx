@@ -1,43 +1,27 @@
-import { NavLink } from "@/types"
+import React, { useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import React, { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { NavLinkType } from "@/types"
+
 import { MenuButton, NavLinks } from "@/components/ui"
 
 type HeaderProps = {
   logoUrl: string
-  navLinks: NavLink[]
+  navLinks: NavLinkType[]
   cvFileUrl?: string
 }
 
 function Header(props: HeaderProps) {
-  const [lastScrollPos, setLastScrollPos] = useState(0)
-  const [showNav, setShowNav] = useState(true)
+  const { asPath } = useRouter()
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY
-      const isScrollingUp = lastScrollPos > currentScrollPos
-
-      if (isScrollingUp || currentScrollPos < 10) {
-        setShowNav(true)
-      } else {
-        setShowNav(false)
-      }
-
-      setLastScrollPos(currentScrollPos)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollPos])
+  const activeNavLink = useMemo(() => {
+    return props.navLinks.find((navLink) => `/${navLink.slug}` === asPath)
+  }, [props.navLinks])
 
   return (
     <header
-      className={`sticky top-0 mx-auto flex h-24 w-full  items-center justify-between px-6 transition-transform duration-300 md:px-10 ${
-        showNav ? "translate-y-0" : "-translate-y-full"
-      }`}
+      className={`sticky top-0 mx-auto flex h-24 w-full  items-center justify-between px-6 transition-transform duration-300 md:px-10`}
     >
       <Link href={"/"} className="z-20">
         <div className="rounded-2xl border-[1px] border-solid border-primary-600 p-[2px]">
@@ -50,6 +34,9 @@ function Header(props: HeaderProps) {
           />
         </div>
       </Link>
+      <div className="md:hidden font-bold z-20">
+        {activeNavLink?.title ?? "Home"}
+      </div>
       <nav className="hidden w-fit md:block">
         <NavLinks data={props.navLinks} />
       </nav>

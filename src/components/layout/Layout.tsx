@@ -1,7 +1,8 @@
-import { Space_Grotesk, Inter } from "next/font/google"
-import type { NavLink } from "@/types"
-import Header from "./Header"
+import { Inter, Space_Grotesk } from "next/font/google"
+import { NavLinkType } from "@/types"
+
 import { DraftMode } from "../ui"
+import Header from "./Header"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -15,7 +16,7 @@ const inter = Inter({
 
 type CommonProps = {
   logoUrl: string
-  navLinks: NavLink[]
+  navLinks: NavLinkType[]
   cvFileUrl?: string
 }
 
