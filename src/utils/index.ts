@@ -1,9 +1,9 @@
 import { GraphQLClient } from "graphql-request"
-import { GraphQLClientRequestHeaders } from "graphql-request/build/esm/types"
 
-export const createGraphqlClient = (draftMode: boolean = false) => {
-  const headers: GraphQLClientRequestHeaders = {
-    Authorization: process.env.DATOCMS_GRAPHQL_TOKEN!
+export const createNodeJSGraphqlClient = (draftMode: boolean = false) => {
+  const headers: HeadersInit = {
+    Authorization: process.env.DATOCMS_GRAPHQL_TOKEN!,
+    "X-Exclude-Invalid": "true"
   }
 
   if (draftMode) {

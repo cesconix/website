@@ -1,18 +1,22 @@
+import { ReactElement } from "react"
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next"
 import Head from "next/head"
-import { PageQuery, useAllSlugsQuery, usePageQuery } from "@/types/codegen"
-import { CustomStructuredText } from "@/components/ui"
-import { createGraphqlClient } from "@/utils"
-import { ReactElement } from "react"
+import { createNodeJSGraphqlClient } from "@/utils"
+
+import {
+  PageDocument,
+  PageQuery,
+  PagesSlugDocument
+} from "@/types/codegen/graphql"
 import { Layout } from "@/components/layout"
+import { CustomStructuredText } from "@/components/ui"
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const graphqlClient = createGraphqlClient()
+  const client = createNodeJSGraphqlClient()
+  const pagesSlug = await client.request(PagesSlugDocument)
 
-  const { allPages } = await useAllSlugsQuery.fetcher(graphqlClient)()
-
-  const paths = allPages.map((page) => ({
-    params: { slug: page.slug === "home" ? [] : [page.slug] }
+  const paths = pagesSlug.allPages.map((page) => ({
+    params: { slug: page.slug }
   }))
 
   return {
@@ -27,11 +31,11 @@ type PageType = {
 }
 
 export const getStaticProps: GetStaticProps<PageType> = async (context) => {
-  const graphqlClient = createGraphqlClient(context.draftMode)
+  const client = createNodeJSGraphqlClient(context.draftMode)
 
-  const pageQuery = await usePageQuery.fetcher(graphqlClient, {
-    slug: { eq: context.params!.slug?.at(0) as string }
-  })()
+  const pageQuery = await client.request(PageDocument, {
+    slug: context.params?.slug as string
+  })
 
   return {
     props: {
@@ -46,7 +50,7 @@ const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
-        <title>{props.pageQuery.page?.title} | Francesco Pasqua</title>
+        <title>{`${props.pageQuery.page?.title} | Francesco Pasqua`}</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

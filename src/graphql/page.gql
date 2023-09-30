@@ -1,11 +1,11 @@
-query AllSlugs {
+query PagesSlug {
   allPages {
     slug
   }
 }
 
-query Page($slug: SlugFilter!) {
-  page(filter: { slug: $slug }) {
+query Page($slug: String!) {
+  page(filter: { slug: { eq: $slug } }) {
     title
     slug
     content {

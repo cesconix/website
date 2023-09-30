@@ -10,21 +10,17 @@ module.exports = {
       }
     }
   },
-  documents: ["./src/**/*.graphql"],
+  documents: ["./src/**/*.gql"],
   ignoreNoDocuments: true,
   generates: {
-    "./src/types/codegen.ts": {
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-react-query"
-      ],
+    "./src/types/codegen/": {
+      preset: "client",
+      presetConfig: {
+        fragmentMasking: false
+      },
       config: {
-        fetcher: "graphql-request",
-        exposeQueryKeys: true,
-        exposeFetcher: true,
+        useIndexSignature: true,
         strictScalars: true,
-        skipTypename: true,
         scalars: {
           BooleanType: "boolean",
           CustomData: "Record<string, string>",

@@ -1,5 +1,6 @@
-import { GraphQLClient } from "graphql-request"
-import { useQuery, UseQueryOptions } from "@tanstack/react-query"
+/* eslint-disable */
+import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core"
+
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -20,20 +21,6 @@ export type Incremental<T> =
   | {
       [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never
     }
-
-function fetcher<TData, TVariables extends { [key: string]: any }>(
-  client: GraphQLClient,
-  query: string,
-  variables?: TVariables,
-  requestHeaders?: RequestInit["headers"]
-) {
-  return async (): Promise<TData> =>
-    client.request({
-      document: query,
-      variables,
-      requestHeaders
-    })
-}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string }
@@ -41,10 +28,14 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean }
   Int: { input: number; output: number }
   Float: { input: number; output: number }
+  /** Represents `true` or `false` values. */
   BooleanType: { input: boolean; output: boolean }
   CustomData: { input: Record<string, string>; output: Record<string, string> }
+  /** A ISO 8601 compliant datetime value */
   DateTime: { input: string; output: string }
+  /** Represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). */
   FloatType: { input: number; output: number }
+  /** Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. */
   IntType: { input: number; output: number }
   ItemId: { input: string; output: string }
   JsonField: { input: unknown; output: unknown }
@@ -62,6 +53,7 @@ export type BooleanFilter = {
 }
 
 export type CollectionMetadata = {
+  __typename?: "CollectionMetadata"
   count: Scalars["IntType"]["output"]
 }
 
@@ -81,6 +73,7 @@ export enum ColorBucketType {
 }
 
 export type ColorField = {
+  __typename?: "ColorField"
   alpha: Scalars["IntType"]["output"]
   blue: Scalars["IntType"]["output"]
   cssRgb: Scalars["String"]["output"]
@@ -91,6 +84,7 @@ export type ColorField = {
 
 /** Record of type Common (common) */
 export type CommonRecord = RecordInterface & {
+  __typename?: "CommonRecord"
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
@@ -139,6 +133,7 @@ export enum FaviconType {
 }
 
 export type FileField = FileFieldInterface & {
+  __typename?: "FileField"
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
@@ -281,6 +276,7 @@ export type FileFieldInterfaceUrlArgs = {
 }
 
 export type GlobalSeoField = {
+  __typename?: "GlobalSeoField"
   facebookPageUrl?: Maybe<Scalars["String"]["output"]>
   fallbackSeo?: Maybe<SeoField>
   siteName?: Maybe<Scalars["String"]["output"]>
@@ -290,6 +286,7 @@ export type GlobalSeoField = {
 
 /** Block of type HeroImage (hero_image) */
 export type HeroImageRecord = RecordInterface & {
+  __typename?: "HeroImageRecord"
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
@@ -313,6 +310,7 @@ export type HeroImageRecord_SeoMetaTagsArgs = {
 }
 
 export type HeroProfileModelShortBioField = {
+  __typename?: "HeroProfileModelShortBioField"
   blocks: Array<HeroProfileRecord>
   links: Array<Scalars["String"]["output"]>
   value: Scalars["JsonField"]["output"]
@@ -320,6 +318,7 @@ export type HeroProfileModelShortBioField = {
 
 /** Block of type HeroProfile (hero_profile) */
 export type HeroProfileRecord = RecordInterface & {
+  __typename?: "HeroProfileRecord"
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
@@ -1804,6 +1803,7 @@ export type PageModelContentBlocksField =
   | SocialLinkRecord
 
 export type PageModelContentField = {
+  __typename?: "PageModelContentField"
   blocks: Array<PageModelContentBlocksField>
   links: Array<Scalars["String"]["output"]>
   value: Scalars["JsonField"]["output"]
@@ -1857,6 +1857,7 @@ export enum PageModelOrderBy {
 
 /** Record of type Page (page) */
 export type PageRecord = RecordInterface & {
+  __typename?: "PageRecord"
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
@@ -1919,6 +1920,7 @@ export type PublishedAtFilter = {
 
 /** The query root for this schema */
 export type Query = {
+  __typename?: "Query"
   /** Returns meta information regarding a record collection */
   _allPagesMeta: CollectionMetadata
   /** Returns meta information regarding an assets collection */
@@ -2038,6 +2040,7 @@ export enum ResolutionType {
 }
 
 export type ResponsiveImage = {
+  __typename?: "ResponsiveImage"
   alt?: Maybe<Scalars["String"]["output"]>
   aspectRatio: Scalars["FloatType"]["output"]
   base64?: Maybe<Scalars["String"]["output"]>
@@ -2052,6 +2055,7 @@ export type ResponsiveImage = {
 }
 
 export type SeoField = {
+  __typename?: "SeoField"
   description?: Maybe<Scalars["String"]["output"]>
   image?: Maybe<FileField>
   title?: Maybe<Scalars["String"]["output"]>
@@ -2059,6 +2063,7 @@ export type SeoField = {
 }
 
 export type Site = {
+  __typename?: "Site"
   favicon?: Maybe<FileField>
   faviconMetaTags: Array<Tag>
   globalSeo?: Maybe<GlobalSeoField>
@@ -2092,6 +2097,7 @@ export type SlugFilter = {
 
 /** Block of type Social Link (social_link) */
 export type SocialLinkRecord = RecordInterface & {
+  __typename?: "SocialLinkRecord"
   _createdAt: Scalars["DateTime"]["output"]
   /** Editing URL */
   _editingUrl?: Maybe<Scalars["String"]["output"]>
@@ -2171,6 +2177,7 @@ export type StructuredTextFilter = {
 }
 
 export type Tag = {
+  __typename?: "Tag"
   attributes?: Maybe<Scalars["MetaTagAttributes"]["output"]>
   content?: Maybe<Scalars["String"]["output"]>
   tag: Scalars["String"]["output"]
@@ -2499,6 +2506,7 @@ export type UploadUpdatedAtFilter = {
 }
 
 export type UploadVideoField = {
+  __typename?: "UploadVideoField"
   duration?: Maybe<Scalars["Int"]["output"]>
   framerate?: Maybe<Scalars["Int"]["output"]>
   mp4Url?: Maybe<Scalars["String"]["output"]>
@@ -2540,30 +2548,39 @@ export enum VideoMp4Res {
 }
 
 export type FocalPoint = {
+  __typename?: "focalPoint"
   x: Scalars["FloatType"]["output"]
   y: Scalars["FloatType"]["output"]
 }
 
-export type AllSlugsQueryVariables = Exact<{ [key: string]: never }>
+export type PagesSlugQueryVariables = Exact<{ [key: string]: never }>
 
-export type AllSlugsQuery = { allPages: Array<{ slug: string }> }
+export type PagesSlugQuery = {
+  __typename?: "Query"
+  allPages: Array<{ __typename?: "PageRecord"; slug: string }>
+}
 
 export type PageQueryVariables = Exact<{
-  slug: SlugFilter
+  slug: Scalars["String"]["input"]
 }>
 
 export type PageQuery = {
+  __typename?: "Query"
   page?: {
+    __typename?: "PageRecord"
     title: string
     slug: string
     content?: {
+      __typename?: "PageModelContentField"
       value: unknown
       blocks: Array<
         | {
             __typename: "HeroImageRecord"
             id: string
             image: {
+              __typename?: "FileField"
               responsiveImage?: {
+                __typename?: "ResponsiveImage"
                 srcSet: string
                 webpSrcSet: string
                 sizes: string
@@ -2583,8 +2600,12 @@ export type PageQuery = {
             welcome: string
             fullname: string
             tagline: string
-            shortBio: { value: unknown }
+            shortBio: {
+              __typename?: "HeroProfileModelShortBioField"
+              value: unknown
+            }
             socialLinks: Array<{
+              __typename?: "SocialLinkRecord"
               key: string
               url: string
               displayName: string
@@ -2594,133 +2615,390 @@ export type PageQuery = {
       >
     } | null
   } | null
-  common?: { logo: { url: string }; cvFile?: { url: string } | null } | null
-  allPages: Array<{ slug: string; title: string; hidden?: boolean | null }>
+  common?: {
+    __typename?: "CommonRecord"
+    logo: { __typename?: "FileField"; url: string }
+    cvFile?: { __typename?: "FileField"; url: string } | null
+  } | null
+  allPages: Array<{
+    __typename?: "PageRecord"
+    slug: string
+    title: string
+    hidden?: boolean | null
+  }>
 }
 
-export const AllSlugsDocument = `
-    query AllSlugs {
-  allPages {
-    slug
-  }
-}
-    `
-export const useAllSlugsQuery = <TData = AllSlugsQuery, TError = unknown>(
-  client: GraphQLClient,
-  variables?: AllSlugsQueryVariables,
-  options?: UseQueryOptions<AllSlugsQuery, TError, TData>,
-  headers?: RequestInit["headers"]
-) =>
-  useQuery<AllSlugsQuery, TError, TData>(
-    variables === undefined ? ["AllSlugs"] : ["AllSlugs", variables],
-    fetcher<AllSlugsQuery, AllSlugsQueryVariables>(
-      client,
-      AllSlugsDocument,
-      variables,
-      headers
-    ),
-    options
-  )
-
-useAllSlugsQuery.getKey = (variables?: AllSlugsQueryVariables) =>
-  variables === undefined ? ["AllSlugs"] : ["AllSlugs", variables]
-useAllSlugsQuery.fetcher = (
-  client: GraphQLClient,
-  variables?: AllSlugsQueryVariables,
-  headers?: RequestInit["headers"]
-) =>
-  fetcher<AllSlugsQuery, AllSlugsQueryVariables>(
-    client,
-    AllSlugsDocument,
-    variables,
-    headers
-  )
-export const PageDocument = `
-    query Page($slug: SlugFilter!) {
-  page(filter: {slug: $slug}) {
-    title
-    slug
-    content {
-      value
-      blocks {
-        __typename
-        ... on HeroProfileRecord {
-          id
-          welcome
-          fullname
-          tagline
-          shortBio {
-            value
-          }
-          socialLinks {
-            key
-            url
-            displayName
-          }
-        }
-        ... on HeroImageRecord {
-          id
-          image {
-            responsiveImage(imgixParams: {auto: format}) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
+export const PagesSlugDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "PagesSlug" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPages" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "slug" } }
+              ]
             }
           }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<PagesSlugQuery, PagesSlugQueryVariables>
+export const PageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Page" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } }
+          }
         }
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "page" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "filter" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "slug" }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "slug" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "content" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "value" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "blocks" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "__typename" }
+                            },
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "HeroProfileRecord"
+                                }
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "id" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "welcome" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "fullname" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "tagline" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "shortBio" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "value" }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: {
+                                      kind: "Name",
+                                      value: "socialLinks"
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "key" }
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "url" }
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "displayName"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: { kind: "Name", value: "HeroImageRecord" }
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "id" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "image" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "responsiveImage"
+                                          },
+                                          arguments: [
+                                            {
+                                              kind: "Argument",
+                                              name: {
+                                                kind: "Name",
+                                                value: "imgixParams"
+                                              },
+                                              value: {
+                                                kind: "ObjectValue",
+                                                fields: [
+                                                  {
+                                                    kind: "ObjectField",
+                                                    name: {
+                                                      kind: "Name",
+                                                      value: "auto"
+                                                    },
+                                                    value: {
+                                                      kind: "EnumValue",
+                                                      value: "format"
+                                                    }
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "srcSet"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "webpSrcSet"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "sizes"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "src"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "width"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "height"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "aspectRatio"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "alt"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "title"
+                                                }
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "base64"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "common" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "CommonRecord" }
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "logo" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "url" }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "cvFile" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "url" }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPages" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "slug" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "hidden" } }
+              ]
+            }
+          }
+        ]
       }
     }
-  }
-  common {
-    ... on CommonRecord {
-      logo {
-        url
-      }
-      cvFile {
-        url
-      }
-    }
-  }
-  allPages {
-    slug
-    title
-    hidden
-  }
-}
-    `
-export const usePageQuery = <TData = PageQuery, TError = unknown>(
-  client: GraphQLClient,
-  variables: PageQueryVariables,
-  options?: UseQueryOptions<PageQuery, TError, TData>,
-  headers?: RequestInit["headers"]
-) =>
-  useQuery<PageQuery, TError, TData>(
-    ["Page", variables],
-    fetcher<PageQuery, PageQueryVariables>(
-      client,
-      PageDocument,
-      variables,
-      headers
-    ),
-    options
-  )
-
-usePageQuery.getKey = (variables: PageQueryVariables) => ["Page", variables]
-usePageQuery.fetcher = (
-  client: GraphQLClient,
-  variables: PageQueryVariables,
-  headers?: RequestInit["headers"]
-) =>
-  fetcher<PageQuery, PageQueryVariables>(
-    client,
-    PageDocument,
-    variables,
-    headers
-  )
+  ]
+} as unknown as DocumentNode<PageQuery, PageQueryVariables>
