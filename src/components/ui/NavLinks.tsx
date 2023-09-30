@@ -20,8 +20,8 @@ function NavLinks(props: NavLinksProps) {
       {props.isMobile && (
         <NavLink
           index={-1}
-          data={{ slug: "/", title: "Home" }}
-          isActive={"/" === asPath}
+          data={{ slug: "/home", title: "Home" }}
+          isActive={"/home" === asPath}
           isMobile={props.isMobile}
         />
       )}

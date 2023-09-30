@@ -23,7 +23,7 @@ function Header(props: HeaderProps) {
     <header
       className={`sticky top-0 mx-auto flex h-24 w-full  items-center justify-between px-6 transition-transform duration-300 md:px-10`}
     >
-      <Link href={"/"} className="z-20">
+      <Link href={"/home"} className="z-20">
         <div className="rounded-2xl border-[1px] border-solid border-primary-600 p-[2px]">
           <Image
             src={props.logoUrl}
