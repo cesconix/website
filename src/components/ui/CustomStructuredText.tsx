@@ -43,7 +43,7 @@ const CustomStructuredText = (props: any) => {
             const imageTitle = (record.image as any).responsiveImage.title
             return (
               <figure
-                className={`relative z-[-1] my-3 flex flex-col items-center md:my-8 ${
+                className={`relative z-[-1] my-6 flex flex-col items-center md:my-8 ${
                   imageTitle && "mt-8"
                 }`}
               >

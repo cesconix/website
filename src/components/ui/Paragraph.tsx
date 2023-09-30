@@ -7,7 +7,7 @@ type ParagraphProps = {
 
 const Paragraph = ({ children, className }: ParagraphProps) => {
   const baseClasses =
-    "text-lg md:text-xl text-foreground-500 my-4 md:my-7 md:leading-relaxed font-space"
+    "text-lg md:text-xl text-foreground-500 my-5 md:my-7 md:leading-relaxed font-space"
   const finalClass = [baseClasses, className].join(" ").trim()
   return <p className={finalClass}>{children}</p>
 }

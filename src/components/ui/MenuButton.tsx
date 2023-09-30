@@ -23,10 +23,10 @@ function MenuButton(props: MenuButtonProps) {
       setOpen(false)
     }
 
-    router.events.on("routeChangeStart", handleRouteComplete)
+    router.events.on("routeChangeComplete", handleRouteComplete)
 
     return () => {
-      router.events.off("routeChangeStart", handleRouteComplete)
+      router.events.off("routeChangeComplete", handleRouteComplete)
     }
   }, [router])
 
