@@ -1,19 +1,10 @@
 import Link from "next/link"
-import { SocialLink } from "@/types"
-import { StructuredText as StructuredTextType } from "datocms-structured-text-utils"
 
+import { HeroProfileBlockFragment } from "@/types/codegen/graphql"
 import { CustomStructuredText, Heading } from "@/components/common"
 import { ArrowIcon } from "@/components/icons"
 
-type AboutMeProps = {
-  welcome: string
-  fullname: string
-  tagline: string
-  shortBio: StructuredTextType
-  socialLinks: SocialLink[]
-}
-
-function AboutMe(props: AboutMeProps) {
+function HeroProfileBlock(props: HeroProfileBlockFragment) {
   return (
     <section className="flex min-h-[calc(100dvh-96px)] flex-col justify-center">
       <div className="space-y-4 text-foreground-700 md:space-y-5">
@@ -49,4 +40,4 @@ function AboutMe(props: AboutMeProps) {
   )
 }
 
-export default AboutMe
+export default HeroProfileBlock

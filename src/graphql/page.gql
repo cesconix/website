@@ -12,37 +12,9 @@ query Page($slug: String!) {
       value
       blocks {
         __typename
-        ... on HeroProfileRecord {
-          id
-          welcome
-          fullname
-          tagline
-          shortBio {
-            value
-          }
-          socialLinks {
-            key
-            url
-            displayName
-          }
-        }
-        ... on HeroImageRecord {
-          id
-          image {
-            responsiveImage(imgixParams: { auto: format }) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
-            }
-          }
-        }
+        ...HeroProfileBlock
+        ...ImageBlock
+        ...TimelineBlock
       }
     }
   }

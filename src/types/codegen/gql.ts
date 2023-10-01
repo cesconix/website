@@ -14,7 +14,13 @@ import * as types from "./graphql"
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  "query PagesSlug {\n  allPages {\n    slug\n  }\n}\n\nquery Page($slug: String!) {\n  page(filter: {slug: {eq: $slug}}) {\n    title\n    slug\n    content {\n      value\n      blocks {\n        __typename\n        ... on HeroProfileRecord {\n          id\n          welcome\n          fullname\n          tagline\n          shortBio {\n            value\n          }\n          socialLinks {\n            key\n            url\n            displayName\n          }\n        }\n        ... on HeroImageRecord {\n          id\n          image {\n            responsiveImage(imgixParams: {auto: format}) {\n              srcSet\n              webpSrcSet\n              sizes\n              src\n              width\n              height\n              aspectRatio\n              alt\n              title\n              base64\n            }\n          }\n        }\n      }\n    }\n  }\n  common {\n    ... on CommonRecord {\n      logo {\n        url\n      }\n      cvFile {\n        url\n      }\n    }\n  }\n  allPages {\n    slug\n    title\n    hidden\n  }\n}":
+  "fragment HeroProfileBlock on HeroProfileBlockRecord {\n  id\n  welcome\n  fullname\n  tagline\n  shortBio {\n    value\n  }\n  socialLinks {\n    key\n    url\n    displayName\n  }\n}":
+    types.HeroProfileBlockFragmentDoc,
+  "fragment ImageBlock on ImageBlockRecord {\n  id\n  image {\n    responsiveImage(imgixParams: {auto: format}) {\n      srcSet\n      webpSrcSet\n      sizes\n      src\n      width\n      height\n      aspectRatio\n      alt\n      title\n      base64\n    }\n  }\n}":
+    types.ImageBlockFragmentDoc,
+  "fragment TimelineBlock on TimelineBlockRecord {\n  id\n  entries {\n    id\n    role\n    company\n    endDate\n    startDate\n    location\n    description {\n      value\n      blocks\n    }\n  }\n}":
+    types.TimelineBlockFragmentDoc,
+  "query PagesSlug {\n  allPages {\n    slug\n  }\n}\n\nquery Page($slug: String!) {\n  page(filter: {slug: {eq: $slug}}) {\n    title\n    slug\n    content {\n      value\n      blocks {\n        __typename\n        ...HeroProfileBlock\n        ...ImageBlock\n        ...TimelineBlock\n      }\n    }\n  }\n  common {\n    ... on CommonRecord {\n      logo {\n        url\n      }\n      cvFile {\n        url\n      }\n    }\n  }\n  allPages {\n    slug\n    title\n    hidden\n  }\n}":
     types.PagesSlugDocument
 }
 
@@ -36,8 +42,26 @@ export function graphql(source: string): unknown
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "query PagesSlug {\n  allPages {\n    slug\n  }\n}\n\nquery Page($slug: String!) {\n  page(filter: {slug: {eq: $slug}}) {\n    title\n    slug\n    content {\n      value\n      blocks {\n        __typename\n        ... on HeroProfileRecord {\n          id\n          welcome\n          fullname\n          tagline\n          shortBio {\n            value\n          }\n          socialLinks {\n            key\n            url\n            displayName\n          }\n        }\n        ... on HeroImageRecord {\n          id\n          image {\n            responsiveImage(imgixParams: {auto: format}) {\n              srcSet\n              webpSrcSet\n              sizes\n              src\n              width\n              height\n              aspectRatio\n              alt\n              title\n              base64\n            }\n          }\n        }\n      }\n    }\n  }\n  common {\n    ... on CommonRecord {\n      logo {\n        url\n      }\n      cvFile {\n        url\n      }\n    }\n  }\n  allPages {\n    slug\n    title\n    hidden\n  }\n}"
-): (typeof documents)["query PagesSlug {\n  allPages {\n    slug\n  }\n}\n\nquery Page($slug: String!) {\n  page(filter: {slug: {eq: $slug}}) {\n    title\n    slug\n    content {\n      value\n      blocks {\n        __typename\n        ... on HeroProfileRecord {\n          id\n          welcome\n          fullname\n          tagline\n          shortBio {\n            value\n          }\n          socialLinks {\n            key\n            url\n            displayName\n          }\n        }\n        ... on HeroImageRecord {\n          id\n          image {\n            responsiveImage(imgixParams: {auto: format}) {\n              srcSet\n              webpSrcSet\n              sizes\n              src\n              width\n              height\n              aspectRatio\n              alt\n              title\n              base64\n            }\n          }\n        }\n      }\n    }\n  }\n  common {\n    ... on CommonRecord {\n      logo {\n        url\n      }\n      cvFile {\n        url\n      }\n    }\n  }\n  allPages {\n    slug\n    title\n    hidden\n  }\n}"]
+  source: "fragment HeroProfileBlock on HeroProfileBlockRecord {\n  id\n  welcome\n  fullname\n  tagline\n  shortBio {\n    value\n  }\n  socialLinks {\n    key\n    url\n    displayName\n  }\n}"
+): (typeof documents)["fragment HeroProfileBlock on HeroProfileBlockRecord {\n  id\n  welcome\n  fullname\n  tagline\n  shortBio {\n    value\n  }\n  socialLinks {\n    key\n    url\n    displayName\n  }\n}"]
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment ImageBlock on ImageBlockRecord {\n  id\n  image {\n    responsiveImage(imgixParams: {auto: format}) {\n      srcSet\n      webpSrcSet\n      sizes\n      src\n      width\n      height\n      aspectRatio\n      alt\n      title\n      base64\n    }\n  }\n}"
+): (typeof documents)["fragment ImageBlock on ImageBlockRecord {\n  id\n  image {\n    responsiveImage(imgixParams: {auto: format}) {\n      srcSet\n      webpSrcSet\n      sizes\n      src\n      width\n      height\n      aspectRatio\n      alt\n      title\n      base64\n    }\n  }\n}"]
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment TimelineBlock on TimelineBlockRecord {\n  id\n  entries {\n    id\n    role\n    company\n    endDate\n    startDate\n    location\n    description {\n      value\n      blocks\n    }\n  }\n}"
+): (typeof documents)["fragment TimelineBlock on TimelineBlockRecord {\n  id\n  entries {\n    id\n    role\n    company\n    endDate\n    startDate\n    location\n    description {\n      value\n      blocks\n    }\n  }\n}"]
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query PagesSlug {\n  allPages {\n    slug\n  }\n}\n\nquery Page($slug: String!) {\n  page(filter: {slug: {eq: $slug}}) {\n    title\n    slug\n    content {\n      value\n      blocks {\n        __typename\n        ...HeroProfileBlock\n        ...ImageBlock\n        ...TimelineBlock\n      }\n    }\n  }\n  common {\n    ... on CommonRecord {\n      logo {\n        url\n      }\n      cvFile {\n        url\n      }\n    }\n  }\n  allPages {\n    slug\n    title\n    hidden\n  }\n}"
+): (typeof documents)["query PagesSlug {\n  allPages {\n    slug\n  }\n}\n\nquery Page($slug: String!) {\n  page(filter: {slug: {eq: $slug}}) {\n    title\n    slug\n    content {\n      value\n      blocks {\n        __typename\n        ...HeroProfileBlock\n        ...ImageBlock\n        ...TimelineBlock\n      }\n    }\n  }\n  common {\n    ... on CommonRecord {\n      logo {\n        url\n      }\n      cvFile {\n        url\n      }\n    }\n  }\n  allPages {\n    slug\n    title\n    hidden\n  }\n}"]
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {}

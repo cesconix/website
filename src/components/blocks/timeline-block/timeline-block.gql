@@ -1,0 +1,15 @@
+fragment TimelineBlock on TimelineBlockRecord {
+  id
+  entries {
+    id
+    role
+    company
+    endDate
+    startDate
+    location
+    description {
+      value
+      blocks
+    }
+  }
+}

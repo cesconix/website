@@ -1,13 +1,7 @@
-import { SocialLink } from "@/types"
-import {
-  isHeading,
-  isParagraph,
-  StructuredText as StructuredTextProps
-} from "datocms-structured-text-utils"
-import { Image, renderNodeRule, StructuredText } from "react-datocms"
+import { isHeading, isParagraph } from "datocms-structured-text-utils"
+import { renderNodeRule, StructuredText } from "react-datocms"
 
-import { AboutMe } from "@/components/blocks"
-
+import * as Blocks from "../blocks"
 import Heading from "./heading"
 import Paragraph from "./paragraph"
 
@@ -28,35 +22,10 @@ const CustomStructuredText = (props: any) => {
         })
       ]}
       renderBlock={({ record }) => {
-        switch (record.__typename) {
-          case "HeroProfileRecord":
-            return (
-              <AboutMe
-                welcome={record.welcome as string}
-                fullname={record.fullname as string}
-                tagline={record.tagline as string}
-                shortBio={record.shortBio as StructuredTextProps}
-                socialLinks={record.socialLinks as SocialLink[]}
-              />
-            )
-          case "HeroImageRecord":
-            const imageTitle = (record.image as any).responsiveImage.title
-            return (
-              <figure
-                className={`relative z-[-1] my-6 flex flex-col items-center md:my-8 ${
-                  imageTitle && "mt-8"
-                }`}
-              >
-                <Image data={(record.image as any).responsiveImage} />
-                {imageTitle && (
-                  <figcaption className="mt-3 text-center font-space text-xs text-foreground-600 md:text-sm">
-                    {imageTitle}
-                  </figcaption>
-                )}
-              </figure>
-            )
-          default:
-            return null
+        const componentName = record.__typename.split("Record")[0]
+        const BlockComponent = (Blocks as any)[componentName]
+        if (BlockComponent) {
+          return <BlockComponent {...record} />
         }
       }}
       {...props}

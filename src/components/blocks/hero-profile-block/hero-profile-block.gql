@@ -1,0 +1,14 @@
+fragment HeroProfileBlock on HeroProfileBlockRecord {
+  id
+  welcome
+  fullname
+  tagline
+  shortBio {
+    value
+  }
+  socialLinks {
+    key
+    url
+    displayName
+  }
+}

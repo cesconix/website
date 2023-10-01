@@ -23,6 +23,9 @@ dependencies:
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.27)
+  change-case:
+    specifier: ^5.0.1
+    version: 5.0.1
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -2838,6 +2841,10 @@ packages:
       snake-case: 3.0.4
       tslib: 2.6.1
     dev: true
+
+  /change-case@5.0.1:
+    resolution: {integrity: sha512-iQ4vIQKF6hFRAGi3AKnoZPRpYfzj6/Zc4trhe/Ngzlk1FblM573PgfIiccATvQc81oFYub8Z9UY5QSOxsSSQYA==}
+    dev: false
 
   /chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}

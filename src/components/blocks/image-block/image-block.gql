@@ -1,0 +1,17 @@
+fragment ImageBlock on ImageBlockRecord {
+  id
+  image {
+    responsiveImage(imgixParams: { auto: format }) {
+      srcSet
+      webpSrcSet
+      sizes
+      src
+      width
+      height
+      aspectRatio
+      alt
+      title
+      base64
+    }
+  }
+}
