@@ -8,8 +8,8 @@ import { Image, renderNodeRule, StructuredText } from "react-datocms"
 
 import { AboutMe } from "@/components/blocks"
 
-import Heading from "./Heading"
-import Paragraph from "./Paragraph"
+import Heading from "./heading"
+import Paragraph from "./paragraph"
 
 const CustomStructuredText = (props: any) => {
   return (

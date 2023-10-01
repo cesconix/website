@@ -2,7 +2,7 @@ import { Inter, Space_Grotesk } from "next/font/google"
 import { NavLinkType } from "@/types"
 
 import { DraftMode } from "../common"
-import Header from "./Header"
+import Header from "./header"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
