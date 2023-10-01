@@ -45,7 +45,7 @@ function TimelineBlock(props: TimelineBlockFragment) {
                   )}
                 </span>
               </div>
-              <div>
+              <div className="space-y-4">
                 <StructuredText
                   data={entry.description as any}
                   customNodeRules={[
