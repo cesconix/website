@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { StructuredText as StructuredTextType } from "datocms-structured-text-utils"
 import { SocialLink } from "@/types"
+import { StructuredText as StructuredTextType } from "datocms-structured-text-utils"
+
+import { CustomStructuredText, Heading } from "@/components/common"
 import { ArrowIcon } from "@/components/icons"
-import { CustomStructuredText, Heading } from "@/components/ui"
 
 type AboutMeProps = {
   welcome: string

@@ -1,7 +1,7 @@
 import { Inter, Space_Grotesk } from "next/font/google"
 import { NavLinkType } from "@/types"
 
-import { DraftMode } from "../ui"
+import { DraftMode } from "../common"
 import Header from "./Header"
 
 const spaceGrotesk = Space_Grotesk({

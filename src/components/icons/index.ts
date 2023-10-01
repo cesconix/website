@@ -1,3 +1,3 @@
-export { default as ArrowIcon } from "./ArrowIcon"
-export { default as CloseIcon } from "./CloseIcon"
-export { default as MenuIcon } from "./MenuIcon"
+export { default as ArrowIcon } from "./arrow-icon"
+export { default as CloseIcon } from "./close-icon"
+export { default as MenuIcon } from "./menu-icon"

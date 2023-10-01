@@ -8,8 +8,8 @@ import {
   PageQuery,
   PagesSlugDocument
 } from "@/types/codegen/graphql"
+import { CustomStructuredText } from "@/components/common"
 import { Layout } from "@/components/layout"
-import { CustomStructuredText } from "@/components/ui"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const client = createNodeJSGraphqlClient()

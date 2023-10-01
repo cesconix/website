@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { NavLinkType } from "@/types"
 
-import { MenuButton, NavLinks } from "@/components/ui"
+import { MenuButton, NavLinks } from "@/components/common"
 
 type HeaderProps = {
   logoUrl: string

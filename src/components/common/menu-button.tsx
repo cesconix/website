@@ -6,7 +6,7 @@ import * as Dialog from "@radix-ui/react-dialog"
 
 import { CloseIcon, MenuIcon } from "@/components/icons"
 
-import NavLinks from "./NavLinks"
+import NavLinks from "./nav-links"
 
 type MenuButtonProps = {
   navLinks: NavLinkType[]
