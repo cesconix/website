@@ -1,7 +1,7 @@
 fragment ImageBlock on ImageBlockRecord {
   id
   image {
-    responsiveImage(imgixParams: { auto: format }) {
+    responsiveImage(imgixParams: { auto: format, w: 690 }) {
       srcSet
       webpSrcSet
       sizes

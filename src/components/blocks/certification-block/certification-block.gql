@@ -4,7 +4,7 @@ fragment CertificationBlock on CertificationBlockRecord {
     id
     link
     badge {
-      responsiveImage(imgixParams: { auto: format }) {
+      responsiveImage(imgixParams: { w: 124, h: 124 }) {
         srcSet
         webpSrcSet
         sizes
