@@ -1,13 +1,13 @@
 import React, { useMemo } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { NavLinkType } from "@/types"
 
-import { MenuButton, NavLinks } from "@/components/common"
+import { ResponsiveImage } from "@/types/codegen/graphql"
+import { Logo, MenuButton, NavLinks } from "@/components/common"
 
-type HeaderProps = {
-  logoUrl: string
+export type HeaderProps = {
+  logo: ResponsiveImage
   navLinks: NavLinkType[]
   cvFileUrl?: string
 }
@@ -21,20 +21,12 @@ function Header(props: HeaderProps) {
 
   return (
     <header
-      className={`sticky top-0 mx-auto flex h-24 w-full  items-center justify-between px-6 transition-transform duration-300 md:px-10`}
+      className={`mx-auto flex h-24 w-full items-center justify-between px-6 transition-transform duration-300 md:px-10`}
     >
-      <Link href={"/home"} className="z-20">
-        <div className="rounded-2xl border-[1px] border-solid border-primary-600 p-[2px]">
-          <Image
-            src={props.logoUrl}
-            alt="Francesco Pasqua website logo"
-            width={36}
-            height={36}
-            className="rounded-[14px]"
-          />
-        </div>
+      <Link href={"/home"}>
+        <Logo logo={props.logo} />
       </Link>
-      <div className="md:hidden font-bold z-20">
+      <div className="md:hidden font-bold">
         {activeNavLink?.title ?? "Home"}
       </div>
       <nav className="hidden w-fit md:block">
@@ -50,7 +42,7 @@ function Header(props: HeaderProps) {
           </Link>
         </div>
         <div className="flex items-center md:hidden">
-          <MenuButton navLinks={props.navLinks} />
+          <MenuButton {...props} />
         </div>
       </div>
     </header>

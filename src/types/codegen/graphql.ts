@@ -2870,7 +2870,22 @@ export type PageQuery = {
   } | null
   common?: {
     __typename?: "CommonRecord"
-    logo: { __typename?: "FileField"; url: string }
+    logo: {
+      __typename?: "FileField"
+      responsiveImage?: {
+        __typename?: "ResponsiveImage"
+        srcSet: string
+        webpSrcSet: string
+        sizes: string
+        src: string
+        width: number
+        height: number
+        aspectRatio: number
+        alt?: string | null
+        title?: string | null
+        base64?: string | null
+      } | null
+    }
     cvFile?: { __typename?: "FileField"; url: string } | null
   } | null
   allPages: Array<{
@@ -3301,7 +3316,81 @@ export const PageDocument = {
                           selections: [
                             {
                               kind: "Field",
-                              name: { kind: "Name", value: "url" }
+                              name: { kind: "Name", value: "responsiveImage" },
+                              arguments: [
+                                {
+                                  kind: "Argument",
+                                  name: { kind: "Name", value: "imgixParams" },
+                                  value: {
+                                    kind: "ObjectValue",
+                                    fields: [
+                                      {
+                                        kind: "ObjectField",
+                                        name: { kind: "Name", value: "auto" },
+                                        value: {
+                                          kind: "EnumValue",
+                                          value: "format"
+                                        }
+                                      },
+                                      {
+                                        kind: "ObjectField",
+                                        name: { kind: "Name", value: "w" },
+                                        value: { kind: "IntValue", value: "36" }
+                                      },
+                                      {
+                                        kind: "ObjectField",
+                                        name: { kind: "Name", value: "h" },
+                                        value: { kind: "IntValue", value: "36" }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "srcSet" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "webpSrcSet" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "sizes" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "src" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "aspectRatio" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "alt" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "title" }
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "base64" }
+                                  }
+                                ]
+                              }
                             }
                           ]
                         }

@@ -6,7 +6,7 @@ import { ArrowIcon } from "@/components/icons"
 
 function CertificationBlock(props: CertificationBlockFragment) {
   return (
-    <div className="pt-5 pb-1 md:pb-3">
+    <div className="pt-5 pb-1 md:pb-3 relative ">
       {props.entries
         .filter((entry) => !entry.inProgress)
         .map((entry) => {
@@ -15,7 +15,7 @@ function CertificationBlock(props: CertificationBlockFragment) {
               target="_blank"
               href={entry.link!}
               key={entry.id}
-              className="flex gap-4 my-2 items-center no-underline relative z-[-1]"
+              className="flex gap-4 my-2 items-center no-underline"
             >
               <div className="w-14">
                 <Image data={entry.badge.responsiveImage!} />

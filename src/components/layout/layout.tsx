@@ -1,5 +1,6 @@
 import { Inter, Space_Grotesk } from "next/font/google"
 import { NavLinkType } from "@/types"
+import { ResponsiveImageType } from "react-datocms/image"
 
 import { DraftMode } from "@/components/common"
 
@@ -16,7 +17,7 @@ const inter = Inter({
 })
 
 type CommonProps = {
-  logoUrl: string
+  logo: ResponsiveImageType
   navLinks: NavLinkType[]
   cvFileUrl?: string
 }
@@ -30,10 +31,11 @@ type LayoutProps = {
 function Layout(props: LayoutProps) {
   return (
     <div
+      id="cesconix"
       className={`${spaceGrotesk.variable} ${inter.variable} relative overflow-y-scroll font-space`}
     >
       <Header
-        logoUrl={props.commonProps.logoUrl}
+        logo={props.commonProps.logo}
         navLinks={props.commonProps.navLinks}
         cvFileUrl={props.commonProps.cvFileUrl}
       />

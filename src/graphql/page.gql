@@ -22,7 +22,18 @@ query Page($slug: String!) {
   common {
     ... on CommonRecord {
       logo {
-        url
+        responsiveImage(imgixParams: { auto: format, w: 36, h: 36 }) {
+          srcSet
+          webpSrcSet
+          sizes
+          src
+          width
+          height
+          aspectRatio
+          alt
+          title
+          base64
+        }
       }
       cvFile {
         url

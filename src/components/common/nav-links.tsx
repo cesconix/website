@@ -59,7 +59,7 @@ function NavLink(props: NavLinkProps) {
         className={clsx(
           "mx-1 flex place-items-baseline no-underline text-right hover:text-foreground-100",
           props.isActive ? "text-foreground-100" : "text-foreground-500",
-          props.isMobile ? "space-y-4 px-6 text-3xl font-medium" : "p-3 text-sm"
+          props.isMobile ? "py-2 px-6 text-3xl font-medium" : "p-3 text-sm"
         )}
       >
         <div

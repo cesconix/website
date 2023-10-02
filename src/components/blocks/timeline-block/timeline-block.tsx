@@ -6,7 +6,7 @@ import { TimelineBlockFragment } from "@/types/codegen/graphql"
 
 function TimelineBlock(props: TimelineBlockFragment) {
   return (
-    <div className="relative ml-3 text-foreground-500 my-10 z-[-1]">
+    <div className="relative ml-3 text-foreground-500 my-10">
       <div className="absolute left-0 top-4 bottom-0 w-[1px] border-l border-dashed border-l-primary-600"></div>
       <div className="grid gap-14 md:gap-16 text-lg md:text-xl">
         {props.entries.map((entry) => (

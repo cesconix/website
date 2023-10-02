@@ -6,7 +6,7 @@ function ImageBlock(props: ImageBlockFragment) {
   const imageTitle = props.image.responsiveImage?.title
   return (
     <figure
-      className={`relative z-[-1] my-6 flex flex-col items-center md:my-8 ${
+      className={`relative my-6 flex flex-col items-center md:my-8 ${
         imageTitle && "mt-8"
       }`}
     >

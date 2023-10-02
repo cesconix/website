@@ -67,7 +67,7 @@ Page.getLayout = function getLayout(page: ReactElement, pageProps: PageType) {
     <Layout
       draftMode={pageProps.draftMode!}
       commonProps={{
-        logoUrl: pageProps.pageQuery.common?.logo.url!,
+        logo: pageProps.pageQuery.common?.logo.responsiveImage!,
         navLinks: pageProps.pageQuery.allPages,
         cvFileUrl: pageProps.pageQuery.common?.cvFile?.url
       }}
