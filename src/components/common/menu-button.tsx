@@ -39,7 +39,7 @@ function MenuButton(props: MenuButtonProps) {
           </button>
         </Dialog.Trigger>
         <Dialog.Portal container={container}>
-          <Dialog.Content className="fixed inset-0 z-10 mx-auto flex max-w-4xl flex-col justify-between bg-neutral-700 focus:outline-none">
+          <Dialog.Content className="fixed inset-0 z-10 mx-auto flex max-w-4xl flex-col justify-between bg-neutral-800 focus:outline-none">
             <NavLinks data={props.navLinks} isMobile />
             <Link
               href={""}

@@ -54,6 +54,60 @@ export type BooleanFilter = {
   eq?: InputMaybe<Scalars["BooleanType"]["input"]>
 }
 
+/** Block of type 🪪 Certification Block (certification_block) */
+export type CertificationBlockRecord = RecordInterface & {
+  __typename?: "CertificationBlockRecord"
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  _isValid: Scalars["BooleanType"]["output"]
+  _modelApiKey: Scalars["String"]["output"]
+  _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>
+  _status: ItemStatus
+  _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  entries: Array<CertificationEntryRecord>
+  id: Scalars["ItemId"]["output"]
+}
+
+/** Block of type 🪪 Certification Block (certification_block) */
+export type CertificationBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>
+}
+
+/** Block of type 🪪 Certification Entry (certification_entry) */
+export type CertificationEntryRecord = RecordInterface & {
+  __typename?: "CertificationEntryRecord"
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  _isValid: Scalars["BooleanType"]["output"]
+  _modelApiKey: Scalars["String"]["output"]
+  _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>
+  _status: ItemStatus
+  _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  authority: Scalars["String"]["output"]
+  badge: FileField
+  id: Scalars["ItemId"]["output"]
+  inProgress?: Maybe<Scalars["BooleanType"]["output"]>
+  link?: Maybe<Scalars["String"]["output"]>
+  title: Scalars["String"]["output"]
+}
+
+/** Block of type 🪪 Certification Entry (certification_entry) */
+export type CertificationEntryRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>
+}
+
 export type CollectionMetadata = {
   __typename?: "CollectionMetadata"
   count: Scalars["IntType"]["output"]
@@ -1800,6 +1854,7 @@ export type OrientationFilter = {
 }
 
 export type PageModelContentBlocksField =
+  | CertificationBlockRecord
   | HeroProfileBlockRecord
   | ImageBlockRecord
   | SocialLinkRecord
@@ -2618,6 +2673,35 @@ export type FocalPoint = {
   y: Scalars["FloatType"]["output"]
 }
 
+export type CertificationBlockFragment = {
+  __typename?: "CertificationBlockRecord"
+  id: string
+  entries: Array<{
+    __typename?: "CertificationEntryRecord"
+    id: string
+    link?: string | null
+    title: string
+    authority: string
+    inProgress?: boolean | null
+    badge: {
+      __typename?: "FileField"
+      responsiveImage?: {
+        __typename?: "ResponsiveImage"
+        srcSet: string
+        webpSrcSet: string
+        sizes: string
+        src: string
+        width: number
+        height: number
+        aspectRatio: number
+        alt?: string | null
+        title?: string | null
+        base64?: string | null
+      } | null
+    }
+  }>
+}
+
 export type HeroProfileBlockFragment = {
   __typename?: "HeroProfileBlockRecord"
   id: string
@@ -2698,6 +2782,34 @@ export type PageQuery = {
       value: unknown
       blocks: Array<
         | {
+            __typename: "CertificationBlockRecord"
+            id: string
+            entries: Array<{
+              __typename?: "CertificationEntryRecord"
+              id: string
+              link?: string | null
+              title: string
+              authority: string
+              inProgress?: boolean | null
+              badge: {
+                __typename?: "FileField"
+                responsiveImage?: {
+                  __typename?: "ResponsiveImage"
+                  srcSet: string
+                  webpSrcSet: string
+                  sizes: string
+                  src: string
+                  width: number
+                  height: number
+                  aspectRatio: number
+                  alt?: string | null
+                  title?: string | null
+                  base64?: string | null
+                } | null
+              }
+            }>
+          }
+        | {
             __typename: "HeroProfileBlockRecord"
             id: string
             welcome: string
@@ -2769,6 +2881,113 @@ export type PageQuery = {
   }>
 }
 
+export const CertificationBlockFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CertificationBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "CertificationBlockRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "entries" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "link" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "badge" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "responsiveImage" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "imgixParams" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "auto" },
+                                  value: { kind: "EnumValue", value: "format" }
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "srcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "webpSrcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "sizes" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "src" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "width" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "height" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "aspectRatio" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "alt" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "base64" }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "authority" } },
+                { kind: "Field", name: { kind: "Name", value: "inProgress" } }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<CertificationBlockFragment, unknown>
 export const HeroProfileBlockFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -3042,6 +3261,13 @@ export const PageDocument = {
                             {
                               kind: "FragmentSpread",
                               name: { kind: "Name", value: "TimelineBlock" }
+                            },
+                            {
+                              kind: "FragmentSpread",
+                              name: {
+                                kind: "Name",
+                                value: "CertificationBlock"
+                              }
                             }
                           ]
                         }
@@ -3257,6 +3483,108 @@ export const PageDocument = {
                     ]
                   }
                 }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CertificationBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "CertificationBlockRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "entries" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "link" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "badge" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "responsiveImage" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "imgixParams" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "auto" },
+                                  value: { kind: "EnumValue", value: "format" }
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "srcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "webpSrcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "sizes" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "src" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "width" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "height" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "aspectRatio" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "alt" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "base64" }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "authority" } },
+                { kind: "Field", name: { kind: "Name", value: "inProgress" } }
               ]
             }
           }

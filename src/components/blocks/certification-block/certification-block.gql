@@ -1,0 +1,24 @@
+fragment CertificationBlock on CertificationBlockRecord {
+  id
+  entries {
+    id
+    link
+    badge {
+      responsiveImage(imgixParams: { auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
+    title
+    authority
+    inProgress
+  }
+}

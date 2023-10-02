@@ -15,6 +15,7 @@ query Page($slug: String!) {
         ...HeroProfileBlock
         ...ImageBlock
         ...TimelineBlock
+        ...CertificationBlock
       }
     }
   }
