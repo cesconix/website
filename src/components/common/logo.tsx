@@ -9,7 +9,7 @@ type LogoProps = {
 function Logo(props: LogoProps) {
   return (
     <div className="rounded-2xl border-[1px] border-solid border-primary-600 p-[2px]">
-      <Image data={props.logo} className="rounded-[14px]" />
+      <Image data={props.logo} className="rounded-[14px]" lazyLoad={false} />
     </div>
   )
 }
