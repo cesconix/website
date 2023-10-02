@@ -1,7 +1,7 @@
 import { Inter, Space_Grotesk } from "next/font/google"
 import { NavLinkType } from "@/types"
-import { ResponsiveImageType } from "react-datocms/image"
 
+import { ResponsiveImage } from "@/types/codegen/graphql"
 import { DraftMode } from "@/components/common"
 
 import Header from "./header"
@@ -17,7 +17,7 @@ const inter = Inter({
 })
 
 type CommonProps = {
-  logo: ResponsiveImageType
+  logo: ResponsiveImage
   navLinks: NavLinkType[]
   cvFileUrl?: string
 }
