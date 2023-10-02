@@ -3345,12 +3345,12 @@ export const PageDocument = {
                                       {
                                         kind: "ObjectField",
                                         name: { kind: "Name", value: "w" },
-                                        value: { kind: "IntValue", value: "80" }
+                                        value: { kind: "IntValue", value: "36" }
                                       },
                                       {
                                         kind: "ObjectField",
                                         name: { kind: "Name", value: "h" },
-                                        value: { kind: "IntValue", value: "80" }
+                                        value: { kind: "IntValue", value: "36" }
                                       }
                                     ]
                                   }
