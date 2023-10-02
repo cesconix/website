@@ -2936,8 +2936,13 @@ export const CertificationBlockFragmentDoc = {
                               fields: [
                                 {
                                   kind: "ObjectField",
-                                  name: { kind: "Name", value: "auto" },
-                                  value: { kind: "EnumValue", value: "format" }
+                                  name: { kind: "Name", value: "w" },
+                                  value: { kind: "IntValue", value: "124" }
+                                },
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "h" },
+                                  value: { kind: "IntValue", value: "124" }
                                 }
                               ]
                             }
@@ -3081,6 +3086,11 @@ export const ImageBlockFragmentDoc = {
                             kind: "ObjectField",
                             name: { kind: "Name", value: "auto" },
                             value: { kind: "EnumValue", value: "format" }
+                          },
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "w" },
+                            value: { kind: "IntValue", value: "690" }
                           }
                         ]
                       }
@@ -3335,12 +3345,12 @@ export const PageDocument = {
                                       {
                                         kind: "ObjectField",
                                         name: { kind: "Name", value: "w" },
-                                        value: { kind: "IntValue", value: "36" }
+                                        value: { kind: "IntValue", value: "80" }
                                       },
                                       {
                                         kind: "ObjectField",
                                         name: { kind: "Name", value: "h" },
-                                        value: { kind: "IntValue", value: "36" }
+                                        value: { kind: "IntValue", value: "80" }
                                       }
                                     ]
                                   }
@@ -3499,6 +3509,11 @@ export const PageDocument = {
                             kind: "ObjectField",
                             name: { kind: "Name", value: "auto" },
                             value: { kind: "EnumValue", value: "format" }
+                          },
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "w" },
+                            value: { kind: "IntValue", value: "690" }
                           }
                         ]
                       }
@@ -3615,8 +3630,13 @@ export const PageDocument = {
                               fields: [
                                 {
                                   kind: "ObjectField",
-                                  name: { kind: "Name", value: "auto" },
-                                  value: { kind: "EnumValue", value: "format" }
+                                  name: { kind: "Name", value: "w" },
+                                  value: { kind: "IntValue", value: "124" }
+                                },
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "h" },
+                                  value: { kind: "IntValue", value: "124" }
                                 }
                               ]
                             }
