@@ -331,6 +331,20 @@ export type FileFieldInterfaceUrlArgs = {
   imgixParams?: InputMaybe<ImgixParams>
 }
 
+/** Specifies how to filter Single-file/image fields */
+export type FileFilter = {
+  /** Search for records with an exact match. The specified value must be an Upload ID */
+  eq?: InputMaybe<Scalars["UploadId"]["input"]>
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars["BooleanType"]["input"]>
+  /** Filter records that have one of the specified uploads */
+  in?: InputMaybe<Array<InputMaybe<Scalars["UploadId"]["input"]>>>
+  /** Exclude records with an exact match. The specified value must be an Upload ID */
+  neq?: InputMaybe<Scalars["UploadId"]["input"]>
+  /** Filter records that do not have one of the specified uploads */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars["UploadId"]["input"]>>>
+}
+
 export type GlobalSeoField = {
   __typename?: "GlobalSeoField"
   facebookPageUrl?: Maybe<Scalars["String"]["output"]>
@@ -1879,6 +1893,7 @@ export type PageModelFilter = {
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>
   _updatedAt?: InputMaybe<UpdatedAtFilter>
   content?: InputMaybe<StructuredTextFilter>
+  footerAnimatedGif?: InputMaybe<FileFilter>
   hidden?: InputMaybe<BooleanFilter>
   id?: InputMaybe<ItemIdFilter>
   position?: InputMaybe<PositionFilter>
@@ -1930,6 +1945,7 @@ export type PageRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
   content?: Maybe<PageModelContentField>
+  footerAnimatedGif?: Maybe<FileField>
   hidden?: Maybe<Scalars["BooleanType"]["output"]>
   id: Scalars["ItemId"]["output"]
   position?: Maybe<Scalars["IntType"]["output"]>
@@ -2220,7 +2236,7 @@ export type StringMatchesFilter = {
   regexp?: InputMaybe<Scalars["BooleanType"]["input"]>
 }
 
-/** Specifies how to filter Structured Text fields */
+/** Specifies how to filter Structured Text fields values */
 export type StructuredTextFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
   exists?: InputMaybe<Scalars["BooleanType"]["input"]>
@@ -2777,6 +2793,22 @@ export type PageQuery = {
     __typename?: "PageRecord"
     title: string
     slug: string
+    footerAnimatedGif?: {
+      __typename?: "FileField"
+      responsiveImage?: {
+        __typename?: "ResponsiveImage"
+        srcSet: string
+        webpSrcSet: string
+        sizes: string
+        src: string
+        width: number
+        height: number
+        aspectRatio: number
+        alt?: string | null
+        title?: string | null
+        base64?: string | null
+      } | null
+    } | null
     content?: {
       __typename?: "PageModelContentField"
       value: unknown
@@ -3258,6 +3290,80 @@ export const PageDocument = {
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 { kind: "Field", name: { kind: "Name", value: "slug" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "footerAnimatedGif" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "responsiveImage" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "imgixParams" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "auto" },
+                                  value: { kind: "EnumValue", value: "format" }
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "srcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "webpSrcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "sizes" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "src" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "width" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "height" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "aspectRatio" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "alt" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "base64" }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "content" },

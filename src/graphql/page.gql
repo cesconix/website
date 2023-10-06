@@ -8,6 +8,20 @@ query Page($slug: String!) {
   page(filter: { slug: { eq: $slug } }) {
     title
     slug
+    footerAnimatedGif {
+      responsiveImage(imgixParams: { auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
     content {
       value
       blocks {
