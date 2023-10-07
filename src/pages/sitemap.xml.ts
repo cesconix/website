@@ -6,7 +6,7 @@ import { PagesSlugDocument } from "@/types/codegen/graphql"
 const baseUrl = process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
 
 type UrlEntry = {
-  slug: string
+  location: string
   lastmod: string
 }
 
@@ -17,7 +17,7 @@ function generateSiteMap(entries: UrlEntry[]) {
        .map((entry) => {
          return `
        <url>
-         <loc>${`${baseUrl}/${entry.slug}`}</loc>
+         <loc>${entry.location}</loc>
          <lastmod>${entry.lastmod}</lastmod>
        </url>
      `
@@ -33,10 +33,18 @@ export const getServerSideProps = (async (context) => {
   const client = createNodeJSGraphqlClient()
   const pagesSlug = await client.request(PagesSlugDocument)
 
-  const urlEntries: UrlEntry[] = pagesSlug.allPages.map((page) => ({
-    slug: page.slug === "home" ? "" : page.slug,
-    lastmod: page._publishedAt!
-  }))
+  const urlEntries: UrlEntry[] = pagesSlug.allPages.map((page) => {
+    const baseUrl =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : `https://${context.req.headers.host}`
+
+    return {
+      location:
+        page.slug === "home" ? `${baseUrl}/` : `${baseUrl}/${page.slug}`,
+      lastmod: page._publishedAt!
+    }
+  })
 
   const sitemap = generateSiteMap(urlEntries)
 
