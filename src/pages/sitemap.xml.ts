@@ -3,7 +3,7 @@ import { createNodeJSGraphqlClient } from "@/utils"
 
 import { PagesSlugDocument } from "@/types/codegen/graphql"
 
-const EXTERNAL_DATA_URL = process.env.BASE_URL || "http://localhost:3000"
+const baseUrl = process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
 
 type UrlEntry = {
   slug: string
@@ -17,7 +17,7 @@ function generateSiteMap(entries: UrlEntry[]) {
        .map((entry) => {
          return `
        <url>
-         <loc>${`${EXTERNAL_DATA_URL}/${entry.slug}`}</loc>
+         <loc>${`${baseUrl}/${entry.slug}`}</loc>
          <lastmod>${entry.lastmod}</lastmod>
        </url>
      `
