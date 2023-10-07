@@ -1,8 +1,8 @@
 import { ReactElement } from "react"
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next"
 import Head from "next/head"
+import Image from "next/image"
 import { createNodeJSGraphqlClient } from "@/utils"
-import { Image } from "react-datocms/image"
 
 import {
   PageDocument,
@@ -48,6 +48,8 @@ export const getStaticProps: GetStaticProps<PageType> = async (context) => {
 }
 
 const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const footerAnimatedGif =
+    props.pageQuery.page?.footerAnimatedGif?.responsiveImage
   return (
     <>
       <Head>
@@ -58,10 +60,13 @@ const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
       </Head>
       <main className="mx-auto max-w-3xl px-6 md:px-10">
         <CustomStructuredText data={props.pageQuery.page?.content} />
-        {props.pageQuery.page?.footerAnimatedGif && (
+        {footerAnimatedGif && (
           <div className="w-14 fixed bottom-0 right-6 md:right-10">
             <Image
-              data={props.pageQuery.page.footerAnimatedGif.responsiveImage!}
+              src={footerAnimatedGif?.src}
+              width={footerAnimatedGif?.width}
+              height={footerAnimatedGif?.height}
+              alt={footerAnimatedGif.alt!}
             />
           </div>
         )}
