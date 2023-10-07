@@ -1,0 +1,13 @@
+fragment ProjectBlock on ProjectBlockRecord {
+  id
+  projects {
+    id
+    date
+    link
+    title
+    description {
+      value
+      blocks
+    }
+  }
+}

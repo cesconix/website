@@ -2,3 +2,4 @@ export { default as HeroProfileBlock } from "./hero-profile-block/hero-profile-b
 export { default as ImageBlock } from "./image-block/image-block"
 export { default as TimelineBlock } from "./timeline-block/timeline-block"
 export { default as CertificationBlock } from "./certification-block/certification-block"
+export { default as ProjectBlock } from "./project-block/project-block"

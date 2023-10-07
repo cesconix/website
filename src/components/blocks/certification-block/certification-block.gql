@@ -1,6 +1,6 @@
 fragment CertificationBlock on CertificationBlockRecord {
   id
-  entries {
+  certifications {
     id
     link
     badge {

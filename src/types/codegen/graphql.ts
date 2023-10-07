@@ -70,7 +70,7 @@ export type CertificationBlockRecord = RecordInterface & {
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
-  entries: Array<CertificationEntryRecord>
+  certifications: Array<CertificationEntryRecord>
   id: Scalars["ItemId"]["output"]
 }
 
@@ -1871,6 +1871,7 @@ export type PageModelContentBlocksField =
   | CertificationBlockRecord
   | HeroProfileBlockRecord
   | ImageBlockRecord
+  | ProjectBlockRecord
   | SocialLinkRecord
   | TimelineBlockRecord
 
@@ -1974,6 +1975,67 @@ export type PositionFilter = {
   lte?: InputMaybe<Scalars["IntType"]["input"]>
   /** Exclude records with an exact match */
   neq?: InputMaybe<Scalars["IntType"]["input"]>
+}
+
+/** Block of type 🧪 Project Block (project_block) */
+export type ProjectBlockRecord = RecordInterface & {
+  __typename?: "ProjectBlockRecord"
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  _isValid: Scalars["BooleanType"]["output"]
+  _modelApiKey: Scalars["String"]["output"]
+  _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>
+  _status: ItemStatus
+  _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  id: Scalars["ItemId"]["output"]
+  projects: Array<ProjectEntryRecord>
+}
+
+/** Block of type 🧪 Project Block (project_block) */
+export type ProjectBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>
+}
+
+export type ProjectEntryModelDescriptionField = {
+  __typename?: "ProjectEntryModelDescriptionField"
+  blocks: Array<Scalars["String"]["output"]>
+  links: Array<Scalars["String"]["output"]>
+  value: Scalars["JsonField"]["output"]
+}
+
+/** Block of type 🧪 Project Entry (project_entry) */
+export type ProjectEntryRecord = RecordInterface & {
+  __typename?: "ProjectEntryRecord"
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  _isValid: Scalars["BooleanType"]["output"]
+  _modelApiKey: Scalars["String"]["output"]
+  _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>
+  _status: ItemStatus
+  _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  date: Scalars["String"]["output"]
+  description: ProjectEntryModelDescriptionField
+  id: Scalars["ItemId"]["output"]
+  image?: Maybe<FileField>
+  link: Scalars["String"]["output"]
+  title: Scalars["String"]["output"]
+}
+
+/** Block of type 🧪 Project Entry (project_entry) */
+export type ProjectEntryRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>
 }
 
 /** Specifies how to filter by publication datetime */
@@ -2281,8 +2343,8 @@ export type TimelineBlockRecord = RecordInterface & {
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
-  entries: Array<TimelineEntryRecord>
   id: Scalars["ItemId"]["output"]
+  timelines: Array<TimelineEntryRecord>
 }
 
 /** Block of type ⏳ Timeline Block (timeline_block) */
@@ -2700,7 +2762,7 @@ export type FocalPoint = {
 export type CertificationBlockFragment = {
   __typename?: "CertificationBlockRecord"
   id: string
-  entries: Array<{
+  certifications: Array<{
     __typename?: "CertificationEntryRecord"
     id: string
     link?: string | null
@@ -2765,10 +2827,27 @@ export type ImageBlockFragment = {
   }
 }
 
+export type ProjectBlockFragment = {
+  __typename?: "ProjectBlockRecord"
+  id: string
+  projects: Array<{
+    __typename?: "ProjectEntryRecord"
+    id: string
+    date: string
+    link: string
+    title: string
+    description: {
+      __typename?: "ProjectEntryModelDescriptionField"
+      value: unknown
+      blocks: Array<string>
+    }
+  }>
+}
+
 export type TimelineBlockFragment = {
   __typename?: "TimelineBlockRecord"
   id: string
-  entries: Array<{
+  timelines: Array<{
     __typename?: "TimelineEntryRecord"
     id: string
     role: string
@@ -2828,7 +2907,7 @@ export type PageQuery = {
         | {
             __typename: "CertificationBlockRecord"
             id: string
-            entries: Array<{
+            certifications: Array<{
               __typename?: "CertificationEntryRecord"
               id: string
               link?: string | null
@@ -2890,11 +2969,27 @@ export type PageQuery = {
               } | null
             }
           }
+        | {
+            __typename: "ProjectBlockRecord"
+            id: string
+            projects: Array<{
+              __typename?: "ProjectEntryRecord"
+              id: string
+              date: string
+              link: string
+              title: string
+              description: {
+                __typename?: "ProjectEntryModelDescriptionField"
+                value: unknown
+                blocks: Array<string>
+              }
+            }>
+          }
         | { __typename: "SocialLinkRecord" }
         | {
             __typename: "TimelineBlockRecord"
             id: string
-            entries: Array<{
+            timelines: Array<{
               __typename?: "TimelineEntryRecord"
               id: string
               role: string
@@ -2961,7 +3056,7 @@ export const CertificationBlockFragmentDoc = {
           { kind: "Field", name: { kind: "Name", value: "id" } },
           {
             kind: "Field",
-            name: { kind: "Name", value: "entries" },
+            name: { kind: "Name", value: "certifications" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [
@@ -3181,6 +3276,49 @@ export const ImageBlockFragmentDoc = {
     }
   ]
 } as unknown as DocumentNode<ImageBlockFragment, unknown>
+export const ProjectBlockFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ProjectBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "ProjectBlockRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "projects" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "date" } },
+                { kind: "Field", name: { kind: "Name", value: "link" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "description" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "value" } },
+                      { kind: "Field", name: { kind: "Name", value: "blocks" } }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<ProjectBlockFragment, unknown>
 export const TimelineBlockFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -3197,7 +3335,7 @@ export const TimelineBlockFragmentDoc = {
           { kind: "Field", name: { kind: "Name", value: "id" } },
           {
             kind: "Field",
-            name: { kind: "Name", value: "entries" },
+            name: { kind: "Name", value: "timelines" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [
@@ -3417,6 +3555,10 @@ export const PageDocument = {
                                 kind: "Name",
                                 value: "CertificationBlock"
                               }
+                            },
+                            {
+                              kind: "FragmentSpread",
+                              name: { kind: "Name", value: "ProjectBlock" }
                             }
                           ]
                         }
@@ -3704,7 +3846,7 @@ export const PageDocument = {
           { kind: "Field", name: { kind: "Name", value: "id" } },
           {
             kind: "Field",
-            name: { kind: "Name", value: "entries" },
+            name: { kind: "Name", value: "timelines" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [
@@ -3744,7 +3886,7 @@ export const PageDocument = {
           { kind: "Field", name: { kind: "Name", value: "id" } },
           {
             kind: "Field",
-            name: { kind: "Name", value: "entries" },
+            name: { kind: "Name", value: "certifications" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [
@@ -3832,6 +3974,44 @@ export const PageDocument = {
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 { kind: "Field", name: { kind: "Name", value: "authority" } },
                 { kind: "Field", name: { kind: "Name", value: "inProgress" } }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ProjectBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "ProjectBlockRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "projects" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "date" } },
+                { kind: "Field", name: { kind: "Name", value: "link" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "description" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "value" } },
+                      { kind: "Field", name: { kind: "Name", value: "blocks" } }
+                    ]
+                  }
+                }
               ]
             }
           }

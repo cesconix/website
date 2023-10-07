@@ -1,6 +1,6 @@
 fragment TimelineBlock on TimelineBlockRecord {
   id
-  entries {
+  timelines {
     id
     role
     company

@@ -7,7 +7,7 @@ import { ArrowIcon } from "@/components/icons"
 function CertificationBlock(props: CertificationBlockFragment) {
   return (
     <div className="pt-5 pb-1 md:pb-3 relative ">
-      {props.entries
+      {props.certifications
         .filter((entry) => !entry.inProgress)
         .map((entry) => {
           return (
