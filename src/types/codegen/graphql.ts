@@ -1897,6 +1897,7 @@ export type PageModelFilter = {
   hidden?: InputMaybe<BooleanFilter>
   id?: InputMaybe<ItemIdFilter>
   position?: InputMaybe<PositionFilter>
+  seo?: InputMaybe<SeoFilter>
   slug?: InputMaybe<SlugFilter>
   title?: InputMaybe<StringFilter>
 }
@@ -1949,6 +1950,7 @@ export type PageRecord = RecordInterface & {
   hidden?: Maybe<Scalars["BooleanType"]["output"]>
   id: Scalars["ItemId"]["output"]
   position?: Maybe<Scalars["IntType"]["output"]>
+  seo?: Maybe<SeoField>
   slug: Scalars["String"]["output"]
   title: Scalars["String"]["output"]
 }
@@ -2134,6 +2136,12 @@ export type SeoField = {
   image?: Maybe<FileField>
   title?: Maybe<Scalars["String"]["output"]>
   twitterCard?: Maybe<Scalars["String"]["output"]>
+}
+
+/** Specifies how to filter SEO meta tags fields */
+export type SeoFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars["BooleanType"]["input"]>
 }
 
 export type Site = {
@@ -2899,6 +2907,11 @@ export type PageQuery = {
           }
       >
     } | null
+    seo?: {
+      __typename?: "SeoField"
+      title?: string | null
+      description?: string | null
+    } | null
   } | null
   common?: {
     __typename?: "CommonRecord"
@@ -3402,6 +3415,20 @@ export const PageDocument = {
                             }
                           ]
                         }
+                      }
+                    ]
+                  }
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "description" }
                       }
                     ]
                   }

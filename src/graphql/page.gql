@@ -32,6 +32,10 @@ query Page($slug: String!) {
         ...CertificationBlock
       }
     }
+    seo {
+      title
+      description
+    }
   }
   common {
     ... on CommonRecord {

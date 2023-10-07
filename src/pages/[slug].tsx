@@ -53,8 +53,11 @@ const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
-        <title>{`${props.pageQuery.page?.title} | Francesco Pasqua`}</title>
-        <meta name="description" content="" />
+        <title>{props.pageQuery.page?.seo?.title}</title>
+        <meta
+          name="description"
+          content={props.pageQuery.page?.seo?.description!}
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
