@@ -2788,7 +2788,11 @@ export type PagesSlugQueryVariables = Exact<{ [key: string]: never }>
 
 export type PagesSlugQuery = {
   __typename?: "Query"
-  allPages: Array<{ __typename?: "PageRecord"; slug: string }>
+  allPages: Array<{
+    __typename?: "PageRecord"
+    slug: string
+    _publishedAt?: string | null
+  }>
 }
 
 export type PageQueryVariables = Exact<{
@@ -3238,7 +3242,8 @@ export const PagesSlugDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "slug" } }
+                { kind: "Field", name: { kind: "Name", value: "slug" } },
+                { kind: "Field", name: { kind: "Name", value: "_publishedAt" } }
               ]
             }
           }

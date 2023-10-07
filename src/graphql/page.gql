@@ -1,6 +1,7 @@
 query PagesSlug {
   allPages {
     slug
+    _publishedAt
   }
 }
 
