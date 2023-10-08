@@ -2027,6 +2027,7 @@ export type ProjectEntryRecord = RecordInterface & {
   _updatedAt: Scalars["DateTime"]["output"]
   date: Scalars["String"]["output"]
   description: ProjectEntryModelDescriptionField
+  hasRepository?: Maybe<Scalars["BooleanType"]["output"]>
   id: Scalars["ItemId"]["output"]
   image?: Maybe<FileField>
   link: Scalars["String"]["output"]
@@ -2836,11 +2837,28 @@ export type ProjectBlockFragment = {
     date: string
     link: string
     title: string
+    hasRepository?: boolean | null
     description: {
       __typename?: "ProjectEntryModelDescriptionField"
       value: unknown
       blocks: Array<string>
     }
+    image?: {
+      __typename?: "FileField"
+      responsiveImage?: {
+        __typename?: "ResponsiveImage"
+        srcSet: string
+        webpSrcSet: string
+        sizes: string
+        src: string
+        width: number
+        height: number
+        aspectRatio: number
+        alt?: string | null
+        title?: string | null
+        base64?: string | null
+      } | null
+    } | null
   }>
 }
 
@@ -2978,11 +2996,28 @@ export type PageQuery = {
               date: string
               link: string
               title: string
+              hasRepository?: boolean | null
               description: {
                 __typename?: "ProjectEntryModelDescriptionField"
                 value: unknown
                 blocks: Array<string>
               }
+              image?: {
+                __typename?: "FileField"
+                responsiveImage?: {
+                  __typename?: "ResponsiveImage"
+                  srcSet: string
+                  webpSrcSet: string
+                  sizes: string
+                  src: string
+                  width: number
+                  height: number
+                  aspectRatio: number
+                  alt?: string | null
+                  title?: string | null
+                  base64?: string | null
+                } | null
+              } | null
             }>
           }
         | { __typename: "SocialLinkRecord" }
@@ -3302,12 +3337,95 @@ export const ProjectBlockFragmentDoc = {
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "Field",
+                  name: { kind: "Name", value: "hasRepository" }
+                },
+                {
+                  kind: "Field",
                   name: { kind: "Name", value: "description" },
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "value" } },
                       { kind: "Field", name: { kind: "Name", value: "blocks" } }
+                    ]
+                  }
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "image" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "responsiveImage" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "imgixParams" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "auto" },
+                                  value: { kind: "EnumValue", value: "format" }
+                                },
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "w" },
+                                  value: { kind: "IntValue", value: "300" }
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "srcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "webpSrcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "sizes" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "src" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "width" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "height" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "aspectRatio" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "alt" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "base64" }
+                            }
+                          ]
+                        }
+                      }
                     ]
                   }
                 }
@@ -4003,12 +4121,95 @@ export const PageDocument = {
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "Field",
+                  name: { kind: "Name", value: "hasRepository" }
+                },
+                {
+                  kind: "Field",
                   name: { kind: "Name", value: "description" },
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "value" } },
                       { kind: "Field", name: { kind: "Name", value: "blocks" } }
+                    ]
+                  }
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "image" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "responsiveImage" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "imgixParams" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "auto" },
+                                  value: { kind: "EnumValue", value: "format" }
+                                },
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "w" },
+                                  value: { kind: "IntValue", value: "300" }
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "srcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "webpSrcSet" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "sizes" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "src" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "width" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "height" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "aspectRatio" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "alt" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" }
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "base64" }
+                            }
+                          ]
+                        }
+                      }
                     ]
                   }
                 }

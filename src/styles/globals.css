@@ -6,8 +6,8 @@ body {
   letter-spacing: -0.3px;
 }
 
-a {
-  @apply text-primary-600;
+main a {
+  @apply text-primary-600 hover:underline hover:underline-offset-4;
 }
 
 p strong {

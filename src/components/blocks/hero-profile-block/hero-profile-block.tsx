@@ -21,7 +21,7 @@ function HeroProfileBlock(props: HeroProfileBlockFragment) {
           <CustomStructuredText data={props.shortBio} />
         </div>
       </div>
-      <div className="mb-4 mt-14 flex space-x-5">
+      <div className="mb-4 mt-14 flex space-x-6">
         {props.socialLinks.map((socialLink) => {
           return (
             <Link

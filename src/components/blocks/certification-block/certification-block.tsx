@@ -6,14 +6,12 @@ import { ArrowIcon } from "@/components/icons"
 
 function CertificationBlock(props: CertificationBlockFragment) {
   return (
-    <div className="pt-5 pb-1 md:pb-3 relative ">
+    <div className="pt-5 md:pt-3 pb-1 md:pb-3 relative">
       {props.certifications
         .filter((entry) => !entry.inProgress)
         .map((entry) => {
           return (
-            <Link
-              target="_blank"
-              href={entry.link!}
+            <div
               key={entry.id}
               className="flex gap-4 my-2 items-center no-underline"
             >
@@ -21,15 +19,20 @@ function CertificationBlock(props: CertificationBlockFragment) {
                 <Image data={entry.badge.responsiveImage!} />
               </div>
               <div className="">
-                <div className="flex items-center text-base font-medium text-foreground-200 gap-1">
+                <Link
+                  target="_blank"
+                  href={entry.link!}
+                  className="flex items-center text-base font-medium text-foreground-200 gap-1"
+                >
+                  {" "}
                   {entry.title}
                   <ArrowIcon />
-                </div>
+                </Link>
                 <div className="text-base text-foreground-700">
                   {entry.authority}
                 </div>
               </div>
-            </Link>
+            </div>
           )
         })}
     </div>

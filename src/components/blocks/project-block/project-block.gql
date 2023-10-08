@@ -5,9 +5,24 @@ fragment ProjectBlock on ProjectBlockRecord {
     date
     link
     title
+    hasRepository
     description {
       value
       blocks
+    }
+    image {
+      responsiveImage(imgixParams: { auto: format, w: 300 }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
     }
   }
 }
