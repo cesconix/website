@@ -21,7 +21,7 @@ function HeroProfileBlock(props: HeroProfileBlockFragment) {
         </Heading>
         <div className="space-y-4">
           <StructuredText
-            data={props.shortBio!}
+            data={props.shortBio as any}
             customNodeRules={[
               renderNodeRule(isParagraph, ({ children, key }) => {
                 return (
