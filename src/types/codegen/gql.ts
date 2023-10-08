@@ -20,7 +20,7 @@ const documents = {
     types.HeroProfileBlockFragmentDoc,
   "fragment ImageBlock on ImageBlockRecord {\n  id\n  image {\n    responsiveImage(imgixParams: {auto: format, w: 690}) {\n      srcSet\n      webpSrcSet\n      sizes\n      src\n      width\n      height\n      aspectRatio\n      alt\n      title\n      base64\n    }\n  }\n}":
     types.ImageBlockFragmentDoc,
-  "fragment ProjectBlock on ProjectBlockRecord {\n  id\n  projects {\n    id\n    date\n    link\n    title\n    hasRepository\n    description {\n      value\n      blocks\n    }\n    image {\n      responsiveImage(imgixParams: {auto: format, w: 300}) {\n        srcSet\n        webpSrcSet\n        sizes\n        src\n        width\n        height\n        aspectRatio\n        alt\n        title\n        base64\n      }\n    }\n  }\n}":
+  "fragment ProjectBlock on ProjectBlockRecord {\n  id\n  projects {\n    id\n    date\n    link\n    title\n    projectType\n    description {\n      value\n      blocks\n    }\n    image {\n      responsiveImage(imgixParams: {auto: format, w: 300}) {\n        srcSet\n        webpSrcSet\n        sizes\n        src\n        width\n        height\n        aspectRatio\n        alt\n        title\n        base64\n      }\n    }\n  }\n}":
     types.ProjectBlockFragmentDoc,
   "fragment TimelineBlock on TimelineBlockRecord {\n  id\n  timelines {\n    id\n    role\n    company\n    endDate\n    startDate\n    location\n    description {\n      value\n      blocks\n    }\n  }\n}":
     types.TimelineBlockFragmentDoc,
@@ -64,8 +64,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment ProjectBlock on ProjectBlockRecord {\n  id\n  projects {\n    id\n    date\n    link\n    title\n    hasRepository\n    description {\n      value\n      blocks\n    }\n    image {\n      responsiveImage(imgixParams: {auto: format, w: 300}) {\n        srcSet\n        webpSrcSet\n        sizes\n        src\n        width\n        height\n        aspectRatio\n        alt\n        title\n        base64\n      }\n    }\n  }\n}"
-): (typeof documents)["fragment ProjectBlock on ProjectBlockRecord {\n  id\n  projects {\n    id\n    date\n    link\n    title\n    hasRepository\n    description {\n      value\n      blocks\n    }\n    image {\n      responsiveImage(imgixParams: {auto: format, w: 300}) {\n        srcSet\n        webpSrcSet\n        sizes\n        src\n        width\n        height\n        aspectRatio\n        alt\n        title\n        base64\n      }\n    }\n  }\n}"]
+  source: "fragment ProjectBlock on ProjectBlockRecord {\n  id\n  projects {\n    id\n    date\n    link\n    title\n    projectType\n    description {\n      value\n      blocks\n    }\n    image {\n      responsiveImage(imgixParams: {auto: format, w: 300}) {\n        srcSet\n        webpSrcSet\n        sizes\n        src\n        width\n        height\n        aspectRatio\n        alt\n        title\n        base64\n      }\n    }\n  }\n}"
+): (typeof documents)["fragment ProjectBlock on ProjectBlockRecord {\n  id\n  projects {\n    id\n    date\n    link\n    title\n    projectType\n    description {\n      value\n      blocks\n    }\n    image {\n      responsiveImage(imgixParams: {auto: format, w: 300}) {\n        srcSet\n        webpSrcSet\n        sizes\n        src\n        width\n        height\n        aspectRatio\n        alt\n        title\n        base64\n      }\n    }\n  }\n}"]
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

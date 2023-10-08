@@ -43,7 +43,7 @@ function MenuButton(props: HeaderProps) {
     <div>
       <Dialog.Root modal open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
-          <button className="text-foreground-100 mt-1">
+          <button aria-label="menu" className="text-foreground-100 mt-1">
             <MenuIcon />
           </button>
         </Dialog.Trigger>

@@ -69,7 +69,7 @@ const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
               src={footerAnimatedGif?.src}
               width={footerAnimatedGif?.width}
               height={footerAnimatedGif?.height}
-              alt={footerAnimatedGif.alt!}
+              alt={footerAnimatedGif.title!}
             />
           </div>
         )}

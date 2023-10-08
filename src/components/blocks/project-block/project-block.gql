@@ -5,7 +5,7 @@ fragment ProjectBlock on ProjectBlockRecord {
     date
     link
     title
-    hasRepository
+    projectType
     description {
       value
       blocks

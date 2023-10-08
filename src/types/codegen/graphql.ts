@@ -2027,10 +2027,10 @@ export type ProjectEntryRecord = RecordInterface & {
   _updatedAt: Scalars["DateTime"]["output"]
   date: Scalars["String"]["output"]
   description: ProjectEntryModelDescriptionField
-  hasRepository?: Maybe<Scalars["BooleanType"]["output"]>
   id: Scalars["ItemId"]["output"]
   image?: Maybe<FileField>
   link: Scalars["String"]["output"]
+  projectType: Scalars["String"]["output"]
   title: Scalars["String"]["output"]
 }
 
@@ -2837,7 +2837,7 @@ export type ProjectBlockFragment = {
     date: string
     link: string
     title: string
-    hasRepository?: boolean | null
+    projectType: string
     description: {
       __typename?: "ProjectEntryModelDescriptionField"
       value: unknown
@@ -2996,7 +2996,7 @@ export type PageQuery = {
               date: string
               link: string
               title: string
-              hasRepository?: boolean | null
+              projectType: string
               description: {
                 __typename?: "ProjectEntryModelDescriptionField"
                 value: unknown
@@ -3335,10 +3335,7 @@ export const ProjectBlockFragmentDoc = {
                 { kind: "Field", name: { kind: "Name", value: "date" } },
                 { kind: "Field", name: { kind: "Name", value: "link" } },
                 { kind: "Field", name: { kind: "Name", value: "title" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "hasRepository" }
-                },
+                { kind: "Field", name: { kind: "Name", value: "projectType" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "description" },
@@ -4119,10 +4116,7 @@ export const PageDocument = {
                 { kind: "Field", name: { kind: "Name", value: "date" } },
                 { kind: "Field", name: { kind: "Name", value: "link" } },
                 { kind: "Field", name: { kind: "Name", value: "title" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "hasRepository" }
-                },
+                { kind: "Field", name: { kind: "Name", value: "projectType" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "description" },

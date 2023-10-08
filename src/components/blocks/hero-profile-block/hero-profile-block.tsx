@@ -1,7 +1,9 @@
 import Link from "next/link"
+import { isParagraph } from "datocms-structured-text-utils"
+import { renderNodeRule, StructuredText } from "react-datocms/structured-text"
 
 import { HeroProfileBlockFragment } from "@/types/codegen/graphql"
-import { CustomStructuredText, Heading } from "@/components/common"
+import { Heading } from "@/components/common"
 import { ArrowIcon } from "@/components/icons"
 
 function HeroProfileBlock(props: HeroProfileBlockFragment) {
@@ -18,7 +20,19 @@ function HeroProfileBlock(props: HeroProfileBlockFragment) {
           {props.tagline}
         </Heading>
         <div className="space-y-4">
-          <CustomStructuredText data={props.shortBio} />
+          <StructuredText
+            data={props.shortBio!}
+            customNodeRules={[
+              renderNodeRule(isParagraph, ({ children, key }) => {
+                return (
+                  <p key={key} className="mt-8 md:mt-10 text-xl md:text-2xl">
+                    {children}
+                  </p>
+                )
+              })
+            ]}
+            {...props}
+          />
         </div>
       </div>
       <div className="mb-4 mt-14 flex space-x-6">
