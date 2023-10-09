@@ -1,0 +1,9 @@
+fragment ResourceBlock on ResourceBlockRecord {
+  id
+  title
+  resources {
+    title
+    description
+    link
+  }
+}

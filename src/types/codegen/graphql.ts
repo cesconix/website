@@ -1872,6 +1872,7 @@ export type PageModelContentBlocksField =
   | HeroProfileBlockRecord
   | ImageBlockRecord
   | ProjectBlockRecord
+  | ResourceBlockRecord
   | SocialLinkRecord
   | TimelineBlockRecord
 
@@ -2176,6 +2177,59 @@ export enum ResolutionType {
   Large = "large",
   Medium = "medium",
   Small = "small"
+}
+
+/** Block of type 🧳 Resource Block (resource_block) */
+export type ResourceBlockRecord = RecordInterface & {
+  __typename?: "ResourceBlockRecord"
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  _isValid: Scalars["BooleanType"]["output"]
+  _modelApiKey: Scalars["String"]["output"]
+  _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>
+  _status: ItemStatus
+  _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  id: Scalars["ItemId"]["output"]
+  resources: Array<ResourceEntryRecord>
+  title: Scalars["String"]["output"]
+}
+
+/** Block of type 🧳 Resource Block (resource_block) */
+export type ResourceBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>
+}
+
+/** Block of type 🧳 Resource Entry (resource_entry) */
+export type ResourceEntryRecord = RecordInterface & {
+  __typename?: "ResourceEntryRecord"
+  _createdAt: Scalars["DateTime"]["output"]
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars["String"]["output"]>
+  _firstPublishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  _isValid: Scalars["BooleanType"]["output"]
+  _modelApiKey: Scalars["String"]["output"]
+  _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>
+  _status: ItemStatus
+  _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
+  _updatedAt: Scalars["DateTime"]["output"]
+  description: Scalars["String"]["output"]
+  id: Scalars["ItemId"]["output"]
+  link: Scalars["String"]["output"]
+  title: Scalars["String"]["output"]
+}
+
+/** Block of type 🧳 Resource Entry (resource_entry) */
+export type ResourceEntryRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>
 }
 
 export type ResponsiveImage = {
@@ -2862,6 +2916,18 @@ export type ProjectBlockFragment = {
   }>
 }
 
+export type ResourceBlockFragment = {
+  __typename?: "ResourceBlockRecord"
+  id: string
+  title: string
+  resources: Array<{
+    __typename?: "ResourceEntryRecord"
+    title: string
+    description: string
+    link: string
+  }>
+}
+
 export type TimelineBlockFragment = {
   __typename?: "TimelineBlockRecord"
   id: string
@@ -3018,6 +3084,17 @@ export type PageQuery = {
                   base64?: string | null
                 } | null
               } | null
+            }>
+          }
+        | {
+            __typename: "ResourceBlockRecord"
+            id: string
+            title: string
+            resources: Array<{
+              __typename?: "ResourceEntryRecord"
+              title: string
+              description: string
+              link: string
             }>
           }
         | { __typename: "SocialLinkRecord" }
@@ -3434,6 +3511,38 @@ export const ProjectBlockFragmentDoc = {
     }
   ]
 } as unknown as DocumentNode<ProjectBlockFragment, unknown>
+export const ResourceBlockFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ResourceBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "ResourceBlockRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "resources" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                { kind: "Field", name: { kind: "Name", value: "link" } }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<ResourceBlockFragment, unknown>
 export const TimelineBlockFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -3674,6 +3783,10 @@ export const PageDocument = {
                             {
                               kind: "FragmentSpread",
                               name: { kind: "Name", value: "ProjectBlock" }
+                            },
+                            {
+                              kind: "FragmentSpread",
+                              name: { kind: "Name", value: "ResourceBlock" }
                             }
                           ]
                         }
@@ -4207,6 +4320,33 @@ export const PageDocument = {
                     ]
                   }
                 }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ResourceBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "ResourceBlockRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "resources" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                { kind: "Field", name: { kind: "Name", value: "link" } }
               ]
             }
           }

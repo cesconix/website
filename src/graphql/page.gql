@@ -32,6 +32,7 @@ query Page($slug: String!) {
         ...TimelineBlock
         ...CertificationBlock
         ...ProjectBlock
+        ...ResourceBlock
       }
     }
     seo {
