@@ -3,8 +3,6 @@ import { createNodeJSGraphqlClient } from "@/utils"
 
 import { PagesSlugDocument } from "@/types/codegen/graphql"
 
-const baseUrl = process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
-
 type UrlEntry = {
   location: string
   lastmod: string

@@ -65,7 +65,7 @@ export type CertificationBlockRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -90,7 +90,7 @@ export type CertificationEntryRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -149,7 +149,7 @@ export type CommonRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -157,6 +157,7 @@ export type CommonRecord = RecordInterface & {
   cvFile?: Maybe<FileField>
   id: Scalars["ItemId"]["output"]
   logo: FileField
+  socials: Array<SocialLinkRecord>
 }
 
 /** Record of type Common (common) */
@@ -372,15 +373,15 @@ export type HeroProfileBlockRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _updatedAt: Scalars["DateTime"]["output"]
+  commonProps: CommonRecord
   fullname: Scalars["String"]["output"]
   id: Scalars["ItemId"]["output"]
   shortBio: HeroProfileBlockModelShortBioField
-  socialLinks: Array<SocialLinkRecord>
   tagline: Scalars["String"]["output"]
   welcome: Scalars["String"]["output"]
 }
@@ -401,7 +402,7 @@ export type ImageBlockRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -1942,7 +1943,7 @@ export type PageRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -1989,7 +1990,7 @@ export type ProjectBlockRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2021,7 +2022,7 @@ export type ProjectEntryRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2148,7 +2149,7 @@ export type RecordInterface = {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2190,7 +2191,7 @@ export type ResourceBlockRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2216,7 +2217,7 @@ export type ResourceEntryRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2305,7 +2306,7 @@ export type SocialLinkRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2393,7 +2394,7 @@ export type TimelineBlockRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2425,7 +2426,7 @@ export type TimelineEntryRecord = RecordInterface & {
   _modelApiKey: Scalars["String"]["output"]
   _publicationScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
   _publishedAt?: Maybe<Scalars["DateTime"]["output"]>
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>
   _status: ItemStatus
   _unpublishingScheduledAt?: Maybe<Scalars["DateTime"]["output"]>
@@ -2853,12 +2854,16 @@ export type HeroProfileBlockFragment = {
     __typename?: "HeroProfileBlockModelShortBioField"
     value: unknown
   }
-  socialLinks: Array<{
-    __typename?: "SocialLinkRecord"
-    key: string
-    url: string
-    displayName: string
-  }>
+  commonProps: {
+    __typename?: "CommonRecord"
+    socials: Array<{
+      __typename?: "SocialLinkRecord"
+      id: string
+      key: string
+      url: string
+      displayName: string
+    }>
+  }
 }
 
 export type ImageBlockFragment = {
@@ -2958,6 +2963,16 @@ export type PagesSlugQuery = {
   }>
 }
 
+export type CurriculumUrlQueryVariables = Exact<{ [key: string]: never }>
+
+export type CurriculumUrlQuery = {
+  __typename?: "Query"
+  common?: {
+    __typename?: "CommonRecord"
+    cvFile?: { __typename?: "FileField"; url: string } | null
+  } | null
+}
+
 export type PageQueryVariables = Exact<{
   slug: Scalars["String"]["input"]
 }>
@@ -3026,12 +3041,16 @@ export type PageQuery = {
               __typename?: "HeroProfileBlockModelShortBioField"
               value: unknown
             }
-            socialLinks: Array<{
-              __typename?: "SocialLinkRecord"
-              key: string
-              url: string
-              displayName: string
-            }>
+            commonProps: {
+              __typename?: "CommonRecord"
+              socials: Array<{
+                __typename?: "SocialLinkRecord"
+                id: string
+                key: string
+                url: string
+                displayName: string
+              }>
+            }
           }
         | {
             __typename: "ImageBlockRecord"
@@ -3143,6 +3162,13 @@ export type PageQuery = {
       } | null
     }
     cvFile?: { __typename?: "FileField"; url: string } | null
+    socials: Array<{
+      __typename?: "SocialLinkRecord"
+      id: string
+      key: string
+      url: string
+      displayName: string
+    }>
   } | null
   allPages: Array<{
     __typename?: "PageRecord"
@@ -3150,6 +3176,14 @@ export type PageQuery = {
     title: string
     hidden?: boolean | null
   }>
+}
+
+export type SocialLinkFragment = {
+  __typename?: "SocialLinkRecord"
+  id: string
+  key: string
+  url: string
+  displayName: string
 }
 
 export const CertificationBlockFragmentDoc = {
@@ -3264,6 +3298,28 @@ export const CertificationBlockFragmentDoc = {
     }
   ]
 } as unknown as DocumentNode<CertificationBlockFragment, unknown>
+export const SocialLinkFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SocialLink" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SocialLinkRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "key" } },
+          { kind: "Field", name: { kind: "Name", value: "url" } },
+          { kind: "Field", name: { kind: "Name", value: "displayName" } }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<SocialLinkFragment, unknown>
 export const HeroProfileBlockFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -3293,16 +3349,43 @@ export const HeroProfileBlockFragmentDoc = {
           },
           {
             kind: "Field",
-            name: { kind: "Name", value: "socialLinks" },
+            name: { kind: "Name", value: "commonProps" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "key" } },
-                { kind: "Field", name: { kind: "Name", value: "url" } },
-                { kind: "Field", name: { kind: "Name", value: "displayName" } }
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "socials" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "SocialLink" }
+                      }
+                    ]
+                  }
+                }
               ]
             }
           }
+        ]
+      }
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SocialLink" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SocialLinkRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "key" } },
+          { kind: "Field", name: { kind: "Name", value: "url" } },
+          { kind: "Field", name: { kind: "Name", value: "displayName" } }
         ]
       }
     }
@@ -3614,6 +3697,40 @@ export const PagesSlugDocument = {
     }
   ]
 } as unknown as DocumentNode<PagesSlugQuery, PagesSlugQueryVariables>
+export const CurriculumUrlDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "CurriculumUrl" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "common" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "cvFile" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<CurriculumUrlQuery, CurriculumUrlQueryVariables>
 export const PageDocument = {
   kind: "Document",
   definitions: [
@@ -3933,6 +4050,19 @@ export const PageDocument = {
                             }
                           ]
                         }
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "socials" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "FragmentSpread",
+                              name: { kind: "Name", value: "SocialLink" }
+                            }
+                          ]
+                        }
                       }
                     ]
                   }
@@ -3952,6 +4082,23 @@ export const PageDocument = {
               ]
             }
           }
+        ]
+      }
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SocialLink" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SocialLinkRecord" }
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "key" } },
+          { kind: "Field", name: { kind: "Name", value: "url" } },
+          { kind: "Field", name: { kind: "Name", value: "displayName" } }
         ]
       }
     },
@@ -3981,13 +4128,23 @@ export const PageDocument = {
           },
           {
             kind: "Field",
-            name: { kind: "Name", value: "socialLinks" },
+            name: { kind: "Name", value: "commonProps" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "key" } },
-                { kind: "Field", name: { kind: "Name", value: "url" } },
-                { kind: "Field", name: { kind: "Name", value: "displayName" } }
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "socials" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "SocialLink" }
+                      }
+                    ]
+                  }
+                }
               ]
             }
           }

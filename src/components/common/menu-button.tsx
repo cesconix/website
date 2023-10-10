@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { NavLinkType } from "@/types"
 import * as Dialog from "@radix-ui/react-dialog"
 
-import { CloseIcon, MenuIcon } from "@/components/icons"
+import { ArrowIcon, CloseIcon, MenuIcon } from "@/components/icons"
 
 import { HeaderProps } from "../layout/header"
 import Logo from "./logo"
@@ -57,17 +56,39 @@ function MenuButton(props: HeaderProps) {
               <Link href={"/home"}>
                 <Logo logo={props.logo} active={isHome} />
               </Link>
-              <div className="font-bold absolute left-0 text-center right-[2px]">
-                {activeNavLink?.title ?? "Home"}
+              <div className="font-bold absolute left-0 text-center right-[0]">
+                Menu
               </div>
             </header>
             <NavLinks data={props.navLinks} isMobile />
+            <div className="flex space-x-6 my-12 justify-center">
+              {props.socials.map((social) => {
+                return (
+                  <Link
+                    key={social.key}
+                    href={social.url}
+                    className="flex items-center space-x-1 text-base text-foreground-500 md:text-xl"
+                    target="_blank"
+                  >
+                    <span>{social.displayName}</span>
+                    <ArrowIcon />
+                  </Link>
+                )
+              })}
+            </div>
             <Link
-              href={""}
-              className="mx-6 mb-6 block whitespace-nowrap bg-primary-600 px-5 py-3 text-center text-sm font-bold text-neutral-100 no-underline "
+              target="_blank"
+              href={props.cvFileUrl!}
+              className="mx-6 block whitespace-nowrap bg-primary-600 px-5 py-3 text-center text-sm font-bold text-neutral-100 no-underline "
             >
               Download CV
             </Link>
+            <div className="flex justify-center items-center text-sm py-4 text-foreground-500">
+              or download CV using cURL:{" "}
+              <div className="p-1 bg-neutral-300 rounded ml-2 px-2 text-foreground-200 font-mono text-xs">
+                curl cesco.me
+              </div>
+            </div>
             <Dialog.Close asChild>
               <button
                 className="absolute right-[18px] top-7 inline-flex h-10 w-10 appearance-none items-center justify-center focus:outline-none"

@@ -6,9 +6,9 @@ fragment HeroProfileBlock on HeroProfileBlockRecord {
   shortBio {
     value
   }
-  socialLinks {
-    key
-    url
-    displayName
+  commonProps {
+    socials {
+      ...SocialLink
+    }
   }
 }

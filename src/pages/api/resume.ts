@@ -1,15 +1,16 @@
-import fs from "fs"
-import path from "path"
-
 import type { NextApiRequest, NextApiResponse } from "next"
+import { createNodeJSGraphqlClient } from "@/utils"
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    const filePath = path.resolve(process.cwd(), "src", "bin", "resume.sh")
-    const bashScript = fs.readFileSync(filePath, "utf-8")
-    res.setHeader("Content-Type", "text/plain")
-    res.send(bashScript)
-  } catch (err) {
-    res.status(500).send(err)
-  }
+import { CurriculumUrlDocument } from "@/types/codegen/graphql"
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const client = createNodeJSGraphqlClient()
+  const cvDoc = await client.request(CurriculumUrlDocument)
+  const cvUrl = cvDoc.common?.cvFile?.url!
+
+  res.setHeader("Location", cvUrl)
+  res.status(302).end()
 }

@@ -50,6 +50,7 @@ export const getStaticProps: GetStaticProps<PageType> = async (context) => {
 const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const footerAnimatedGif =
     props.pageQuery.page?.footerAnimatedGif?.responsiveImage
+
   return (
     <>
       <Head>
@@ -85,7 +86,8 @@ Page.getLayout = function getLayout(page: ReactElement, pageProps: PageType) {
       commonProps={{
         logo: pageProps.pageQuery.common?.logo.responsiveImage!,
         navLinks: pageProps.pageQuery.allPages,
-        cvFileUrl: pageProps.pageQuery.common?.cvFile?.url
+        cvFileUrl: pageProps.pageQuery.common?.cvFile?.url,
+        socials: pageProps.pageQuery.common?.socials!
       }}
     >
       {page}

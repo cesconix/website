@@ -36,15 +36,15 @@ function HeroProfileBlock(props: HeroProfileBlockFragment) {
         </div>
       </div>
       <div className="mb-4 mt-14 flex space-x-6">
-        {props.socialLinks.map((socialLink) => {
+        {props.commonProps.socials.map((social) => {
           return (
             <Link
-              key={socialLink.key}
-              href={socialLink.url}
+              key={social.key}
+              href={social.url}
               className="flex items-center space-x-1 text-base text-foreground-500 md:text-xl"
               target="_blank"
             >
-              <span>{socialLink.displayName}</span>
+              <span>{social.displayName}</span>
               <ArrowIcon />
             </Link>
           )

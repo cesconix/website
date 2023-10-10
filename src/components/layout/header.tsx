@@ -3,13 +3,14 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { NavLinkType } from "@/types"
 
-import { ResponsiveImage } from "@/types/codegen/graphql"
+import { ResponsiveImage, SocialLinkFragment } from "@/types/codegen/graphql"
 import { Logo, MenuButton, NavLinks } from "@/components/common"
 
 export type HeaderProps = {
   logo: ResponsiveImage
   navLinks: NavLinkType[]
   cvFileUrl?: string
+  socials: SocialLinkFragment[]
 }
 
 function Header(props: HeaderProps) {
@@ -82,7 +83,8 @@ function Header(props: HeaderProps) {
       <div className="flex items-center space-x-4">
         <div className="md:block">
           <Link
-            href={""}
+            target="_blank"
+            href={props.cvFileUrl!}
             className="hidden whitespace-nowrap bg-primary-600 px-5 py-3 text-sm font-bold text-neutral-100 no-underline md:block"
           >
             Download CV

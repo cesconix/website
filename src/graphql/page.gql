@@ -5,6 +5,14 @@ query PagesSlug {
   }
 }
 
+query CurriculumUrl {
+  common {
+    cvFile {
+      url
+    }
+  }
+}
+
 query Page($slug: String!) {
   page(filter: { slug: { eq: $slug } }) {
     title
@@ -59,6 +67,9 @@ query Page($slug: String!) {
       cvFile {
         url
       }
+      socials {
+        ...SocialLink
+      }
     }
   }
   allPages {
@@ -66,4 +77,11 @@ query Page($slug: String!) {
     title
     hidden
   }
+}
+
+fragment SocialLink on SocialLinkRecord {
+  id
+  key
+  url
+  displayName
 }
