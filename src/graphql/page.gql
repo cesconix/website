@@ -9,6 +9,10 @@ query CurriculumUrl {
   common {
     cvFile {
       url
+      filename
+      size
+      mimeType
+      author
     }
   }
 }

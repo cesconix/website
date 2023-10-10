@@ -2969,7 +2969,14 @@ export type CurriculumUrlQuery = {
   __typename?: "Query"
   common?: {
     __typename?: "CommonRecord"
-    cvFile?: { __typename?: "FileField"; url: string } | null
+    cvFile?: {
+      __typename?: "FileField"
+      url: string
+      filename: string
+      size: number
+      mimeType: string
+      author?: string | null
+    } | null
   } | null
 }
 
@@ -3719,7 +3726,17 @@ export const CurriculumUrlDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "url" } }
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "filename" }
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "size" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "mimeType" }
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "author" } }
                     ]
                   }
                 }
