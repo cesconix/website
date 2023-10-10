@@ -20,7 +20,9 @@ function MenuButton(props: HeaderProps) {
     return props.navLinks.find(
       (navLink) => `/${navLink.slug}` === router.asPath
     )
-  }, [props.navLinks])
+  }, [props.navLinks, router.asPath])
+
+  const isHome = activeNavLink?.title === "Home"
 
   useEffect(() => {
     const handleRouteComplete = () => {
@@ -49,14 +51,13 @@ function MenuButton(props: HeaderProps) {
         </Dialog.Trigger>
         <Dialog.Portal container={container}>
           <Dialog.Content className="fixed font-space inset-0 mx-auto flex max-w-4xl flex-col justify-between bg-neutral-700 focus:outline-none">
-            {" "}
             <header
               className={`mx-auto flex h-24 w-full items-center justify-between px-6`}
             >
               <Link href={"/home"}>
-                <Logo logo={props.logo} />
+                <Logo logo={props.logo} active={isHome} />
               </Link>
-              <div className="font-bold absolute left-0 right-0 text-center right-[2px]">
+              <div className="font-bold absolute left-0 text-center right-[2px]">
                 {activeNavLink?.title ?? "Home"}
               </div>
             </header>
