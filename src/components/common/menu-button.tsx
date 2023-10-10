@@ -84,9 +84,9 @@ function MenuButton(props: HeaderProps) {
               Download CV
             </Link>
             <div className="flex justify-center items-center text-sm py-4 text-foreground-500">
-              or download CV using cURL:{" "}
+              or with cURL:{" "}
               <div className="p-1 bg-neutral-300 rounded ml-2 px-2 text-foreground-200 font-mono text-xs">
-                curl cesco.me
+                curl https://cesco.me -o cv.pdf
               </div>
             </div>
             <Dialog.Close asChild>
