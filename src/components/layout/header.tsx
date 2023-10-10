@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useEffect, useMemo } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { NavLinkType } from "@/types"
@@ -13,19 +13,66 @@ export type HeaderProps = {
 }
 
 function Header(props: HeaderProps) {
-  const { asPath } = useRouter()
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const currentIndex = props.navLinks.findIndex(
+        (link) => `/${link.slug}` === router.asPath
+      )
+
+      let newIndex = currentIndex
+
+      switch (event.key) {
+        case "ArrowRight":
+          newIndex = (currentIndex + 1) % props.navLinks.length
+          break
+        case "ArrowLeft":
+          newIndex =
+            currentIndex - 1 < 0 ? props.navLinks.length - 1 : currentIndex - 1
+          break
+        case "0":
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+          newIndex = Number(event.key)
+      }
+
+      if (newIndex !== currentIndex) {
+        router.push(props.navLinks[newIndex].slug)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [props.navLinks, router.asPath])
 
   const activeNavLink = useMemo(() => {
-    return props.navLinks.find((navLink) => `/${navLink.slug}` === asPath)
-  }, [props.navLinks])
+    return props.navLinks.find(
+      (navLink) => `/${navLink.slug}` === router.asPath
+    )
+  }, [props.navLinks, router.asPath])
+
+  const isHome = activeNavLink?.title === "Home"
 
   return (
     <header
       className={`mx-auto flex h-24 w-full items-center justify-between px-6 transition-transform duration-300 md:px-10`}
     >
-      <Link href={"/home"}>
-        <Logo logo={props.logo} />
-      </Link>
+      <div className="relative">
+        <Link href={"/home"}>
+          <Logo logo={props.logo} active={isHome} />
+        </Link>
+        {isHome ? (
+          <div className="hidden absolute w-full md:flex justify-center -bottom-3">
+            <div className="bg-foreground-200 w-1 h-1 rounded" />
+          </div>
+        ) : null}
+      </div>
       <div className="md:hidden font-bold">
         {activeNavLink?.title ?? "Home"}
       </div>
