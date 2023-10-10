@@ -1,6 +1,6 @@
+import Image from "next/image"
 import Link from "next/link"
 import { isParagraph } from "datocms-structured-text-utils"
-import { Image } from "react-datocms/image"
 import { renderNodeRule, StructuredText } from "react-datocms/structured-text"
 
 import { ProjectBlockFragment } from "@/types/codegen/graphql"
@@ -26,10 +26,18 @@ function ProjectBlock(props: ProjectBlockFragment) {
         return (
           <li
             key={entry.id}
-            className="bg-neutral-600 p-5 space-y-4 hover:md:bg-neutral-500"
+            className="bg-neutral-600 p-5 space-y-4 hover:md:bg-neutral-500 relative"
             role="listitem"
           >
-            {entry.image ? <Image data={entry.image.responsiveImage!} /> : null}
+            {entry.image ? (
+              <Image
+                src={entry.image.responsiveImage?.src!}
+                width={entry.image.responsiveImage?.width}
+                height={entry.image.responsiveImage?.height}
+                alt={entry.image.responsiveImage?.alt!}
+                blurDataURL={entry.image.responsiveImage?.base64!}
+              />
+            ) : null}
             <header>
               <h2 className="font-medium text-foreground-200 text-lg flex items-center gap-1">
                 {entry.title}

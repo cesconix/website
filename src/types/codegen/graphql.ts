@@ -3193,12 +3193,12 @@ export const CertificationBlockFragmentDoc = {
                                 {
                                   kind: "ObjectField",
                                   name: { kind: "Name", value: "w" },
-                                  value: { kind: "IntValue", value: "124" }
+                                  value: { kind: "IntValue", value: "112" }
                                 },
                                 {
                                   kind: "ObjectField",
                                   name: { kind: "Name", value: "h" },
-                                  value: { kind: "IntValue", value: "124" }
+                                  value: { kind: "IntValue", value: "112" }
                                 }
                               ]
                             }
@@ -3853,12 +3853,20 @@ export const PageDocument = {
                                       {
                                         kind: "ObjectField",
                                         name: { kind: "Name", value: "w" },
-                                        value: { kind: "IntValue", value: "36" }
+                                        value: { kind: "IntValue", value: "72" }
                                       },
                                       {
                                         kind: "ObjectField",
                                         name: { kind: "Name", value: "h" },
-                                        value: { kind: "IntValue", value: "36" }
+                                        value: { kind: "IntValue", value: "72" }
+                                      },
+                                      {
+                                        kind: "ObjectField",
+                                        name: { kind: "Name", value: "q" },
+                                        value: {
+                                          kind: "IntValue",
+                                          value: "100"
+                                        }
                                       }
                                     ]
                                   }
@@ -4139,12 +4147,12 @@ export const PageDocument = {
                                 {
                                   kind: "ObjectField",
                                   name: { kind: "Name", value: "w" },
-                                  value: { kind: "IntValue", value: "124" }
+                                  value: { kind: "IntValue", value: "112" }
                                 },
                                 {
                                   kind: "ObjectField",
                                   name: { kind: "Name", value: "h" },
-                                  value: { kind: "IntValue", value: "124" }
+                                  value: { kind: "IntValue", value: "112" }
                                 }
                               ]
                             }

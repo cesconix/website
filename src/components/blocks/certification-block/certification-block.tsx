@@ -1,5 +1,5 @@
+import Image from "next/image"
 import Link from "next/link"
-import { Image } from "react-datocms/image"
 
 import { CertificationBlockFragment } from "@/types/codegen/graphql"
 import { ArrowIcon } from "@/components/icons"
@@ -16,7 +16,12 @@ function CertificationBlock(props: CertificationBlockFragment) {
               className="flex gap-4 my-2 items-center no-underline"
             >
               <div className="w-14">
-                <Image data={entry.badge.responsiveImage!} />
+                <Image
+                  src={entry.badge.responsiveImage?.src!}
+                  width={56}
+                  height={56}
+                  alt={entry.badge.responsiveImage?.alt!}
+                />
               </div>
               <div className="">
                 <Link

@@ -9,7 +9,7 @@ function ResourceBlock(props: ResourceBlockFragment) {
       <Heading level="h2">{props.title}</Heading>
       <ul className="space-y-2 text-foreground-500 list-disc ml-3.5">
         {props.resources.map((resource) => (
-          <li className="">
+          <li key={resource.title}>
             <Link href={resource.link} target="_blank">
               {resource.title}
             </Link>

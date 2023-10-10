@@ -43,7 +43,7 @@ query Page($slug: String!) {
   common {
     ... on CommonRecord {
       logo {
-        responsiveImage(imgixParams: { auto: format, w: 36, h: 36 }) {
+        responsiveImage(imgixParams: { auto: format, w: 72, h: 72, q: 100 }) {
           srcSet
           webpSrcSet
           sizes

@@ -1,4 +1,4 @@
-import { Image } from "react-datocms/image"
+import Image from "next/image"
 
 import { ImageBlockFragment } from "@/types/codegen/graphql"
 
@@ -10,7 +10,13 @@ function ImageBlock(props: ImageBlockFragment) {
         imageTitle && "mt-8"
       }`}
     >
-      <Image data={props.image.responsiveImage!} />
+      <Image
+        src={props.image.responsiveImage?.src!}
+        alt={props.image.responsiveImage?.alt!}
+        width={props.image.responsiveImage?.width}
+        height={props.image.responsiveImage?.height}
+        blurDataURL={props.image.responsiveImage?.base64!}
+      />
       {imageTitle && (
         <figcaption className="mt-3 text-center font-space text-xs text-foreground-600 md:text-sm">
           {imageTitle}

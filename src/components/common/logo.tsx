@@ -1,5 +1,5 @@
+import Image from "next/image"
 import clsx from "clsx"
-import { Image } from "react-datocms/image"
 
 import { ResponsiveImage } from "@/types/codegen/graphql"
 
@@ -15,7 +15,14 @@ function Logo(props: LogoProps) {
         "rounded-2xl border-[1px] border-solid border-primary-600 p-[2px] hover:scale-105"
       )}
     >
-      <Image data={props.logo} className="rounded-[14px]" lazyLoad={false} />
+      <Image
+        className="rounded-[14px]"
+        src={props.logo.src}
+        alt={props.logo.alt!}
+        blurDataURL={props.logo.base64!}
+        width={36}
+        height={36}
+      />
     </div>
   )
 }
