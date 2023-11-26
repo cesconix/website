@@ -33,7 +33,7 @@ function Layout(props: LayoutProps) {
   return (
     <div
       id="cesconix"
-      className={`${spaceGrotesk.variable} ${inter.variable} relative overflow-y-scroll font-space`}
+      className={`${spaceGrotesk.variable} ${inter.variable} relative overflow-auto font-space`}
     >
       <Header
         logo={props.commonProps.logo}
